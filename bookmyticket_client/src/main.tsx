@@ -17,4 +17,4 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
   </React.StrictMode>
 );
 
-//end of one part//
+//end of part one//
