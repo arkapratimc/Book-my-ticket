@@ -1,24 +1,38 @@
+import { useQuery } from "@tanstack/react-query";
 import { Card } from "./components/Card.js";
+import styles from "./components/Card.module.css";
+import { type Movies } from "./utils/types.js";
 
 function App() {
-  const foo = [
-    { id: 1, heading: "kalki", description: "lorem10" },
-    { id: 2, heading: "kalki", description: "gg" },
-    { id: 3, heading: "kalki", description: "gg" },
-    { id: 4, heading: "kalki", description: "gg" },
-  ];
-
+  const {
+    isError: is_movies_err,
+    error: movies_err,
+    isPending: is_movies_pending,
+    isSuccess: is_movies_success,
+    data: movies_data,
+  } = useQuery({
+    queryKey: ["all movies"],
+    queryFn: (): Promise<Movies> =>
+      fetch("/all-movies/").then((res) => res.json()),
+  });
   return (
     <>
-      <p>Hi mom</p>
+      <h1>Book My Ticket</h1>
+      {/* TODO: Enhance Types & states */}
+      <div className={styles.container}>
+        {is_movies_pending && <p>Pending ....</p>}
+        {is_movies_err && <p style={{ color: "red" }}>{movies_err.message}</p>}
 
-      {foo.map((card) => (
-        <Card
-          id={card.id}
-          heading={card.heading}
-          description={card.description}
-        />
-      ))}
+        {is_movies_success &&
+          movies_data.map((card) => (
+            <Card
+              name={card.name}
+              description={card.description}
+              runtime={card.runtime}
+              rating={card.rating}
+            />
+          ))}
+      </div>
     </>
   );
 }
