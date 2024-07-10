@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
-import { Card } from "./components/Card.js";
-import styles from "./components/Card.module.css";
+import { Card } from "./components/card/Card.js";
+import styles from "./components/card/Card.module.css";
 import { type Movies } from "./utils/types.js";
 
 function App() {

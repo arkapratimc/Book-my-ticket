@@ -18,3 +18,8 @@ def getAllMovies(request):
     spam = Movie.objects.all()
     serializer = MovieSerializer(spam, many = True)
     return JsonResponse(serializer.data, safe=False)
+
+def locationPage(request, movie):
+    spam = { "foo": 2 }
+
+    return render(request, "movies/index.html", spam)
