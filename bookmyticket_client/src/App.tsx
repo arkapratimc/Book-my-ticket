@@ -26,10 +26,14 @@ function App() {
         {is_movies_success &&
           movies_data.map((card) => (
             <Card
+              id={card.id}
               name={card.name}
               description={card.description}
               runtime={card.runtime}
               rating={card.rating}
+              cover={card.cover}
+              poster={card.poster}
+              key={card.id}
             />
           ))}
       </div>
