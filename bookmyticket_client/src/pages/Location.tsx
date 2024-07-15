@@ -19,10 +19,6 @@ const Location = () => {
       fetch(`/get-locations/${id}`).then((res) => res.json()),
   });
 
-  function foo() {
-    console.log(locations_list);
-  }
-
   return (
     <>
       Hi mom. Film's name - {movie.replaceAll("-", " ")}

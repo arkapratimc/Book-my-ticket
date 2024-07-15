@@ -22,4 +22,14 @@ type Location = {
 
 type Locations = Array<Location>;
 
-export { type Movie, type Movies, type Locations, type Location };
+type Time = {
+    startTime: string;
+    endTime: string;
+    id: number;
+    seats: any;
+};
+
+type SeatsType = Time[];
+
+
+export { type Movie, type Movies, type Locations, type Location, type Time, type SeatsType };
