@@ -16,7 +16,7 @@ let router = createBrowserRouter([
     children: [
       { index: true, element: <App /> },
       {
-        path: "location/:movie", // <- https://www.abc.com/location/kalki eg(??)
+        path: "location/:movie/:id", // <- https://www.abc.com/location/kalki eg(??)
         element: <Location />,
       },
     ],
