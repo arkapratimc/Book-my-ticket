@@ -1,7 +1,7 @@
 from django.shortcuts import render
-from .models import Movie, Location
+from .models import Movie, Location, Time
 from django.http import JsonResponse, HttpResponse
-from .serializers import MovieSerializer, LocationSerializer
+from .serializers import MovieSerializer, LocationSerializer, TimeSerializer
 
 
 def homepage(request):
@@ -23,6 +23,20 @@ def locationPage(request, movie, id):
     spam = { "foo": 2 }
 
     return render(request, "movies/index.html", spam)
+
+
+def seatPage(request, movie_name, movie_id, location, location_id):
+    spam = { "foo": 2 }
+
+    return render(request, "movies/index.html", spam)
+
+
+
+def getSpecSeat(request, time_id):
+    time = Time.objects.get(id = time_id)
+    serializer = TimeSerializer(time, many=False)
+
+    return JsonResponse(serializer.data, safe=False)
 
 
 def getASpecificMovie(request, id):

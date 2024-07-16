@@ -1,6 +1,11 @@
 import { type Location } from "../../utils/types.js";
+import { useNavigate, useParams } from "react-router-dom";
 
-const Place = ({ address, hallName, time }: Location) => {
+const Place = ({ address, hallName, time, id: loc_id }: Location) => {
+
+  const navigate = useNavigate();
+  let { movie, id } = useParams();
+
   return (
     <div
       style={{
@@ -16,6 +21,7 @@ const Place = ({ address, hallName, time }: Location) => {
       <div style={{ flexBasis: "72%", display: "flex", gap: "20px" }}>
         {time.map((time) => (
           <div
+            onClick={() => navigate(`/${movie}/${id}/${hallName}/${time.id}`)}
             style={{
               borderRadius: "4px",
               borderStyle: "solid",

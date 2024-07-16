@@ -6,6 +6,7 @@ import "./index.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Navbar } from "./components/navbar/Navbar.js";
+import { Seats } from "./pages/Seats.js";
 
 const queryClient = new QueryClient();
 
@@ -16,8 +17,12 @@ let router = createBrowserRouter([
     children: [
       { index: true, element: <App /> },
       {
-        path: "location/:movie/:id", // <- https://www.abc.com/location/kalki eg(??)
+        path: ":movie/:id", // <- https://www.abc.com/kalki/1 eg(??)
         element: <Location />,
+      },
+      {
+        path: ":movie/:id/:location/:time_id",
+        element: <Seats />,
       },
     ],
   },
