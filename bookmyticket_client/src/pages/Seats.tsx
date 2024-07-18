@@ -74,28 +74,30 @@ const Seats = () => {
       fetch(`/get-specific-seat/${time_id}`).then((res) => res.json()),
   });
 
-  const container = useRef(new Map());
+  // const container = useRef(new Map());
   const ParentBlock = useRef(null);
 
   const decideWhichSeatsAreBooked = () => {
+    const container = new Map();
+
+
     let all_child_elems = ParentBlock.current.getElementsByTagName("*");
-    all_child_elems = Array.from(all_child_elems);
 
     for (let elem of all_child_elems) {
       if (elem.style.backgroundColor === "green") {
         // console.log(Number(elem.textContent));
-        container.current.set(Number(elem.textContent), true);
+        container.set(Number(elem.textContent), true);
       }
     }
 
     
     for (let [ seat_no, is_booked_already ] of Object.entries(seats_list.seats)) {
       if (is_booked_already) {
-        container.current.delete(Number(seat_no));
+        container.delete(Number(seat_no));
       }
     } 
 
-    console.log(container.current);
+    console.log(container);
 
   };
 
