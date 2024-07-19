@@ -1,5 +1,5 @@
-import { useQuery } from "@tanstack/react-query";
-import { type Locations, type SeatsType, type Time } from "../utils/types.js";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { type Time } from "../utils/types.js";
 import { useParams } from "react-router-dom";
 import { useRef } from "react";
 
@@ -47,7 +47,9 @@ const Seat = ({
 };
 
 const Seats = () => {
-  let { time_id } = useParams();
+  // useQueryClient hook
+  let queryClient = useQueryClient();
+  let { time_id, locid, id } = useParams();
 
   // https://jsbin.com/yinawufeqe/3/edit?js,output
   /* let {
@@ -77,9 +79,25 @@ const Seats = () => {
   // const container = useRef(new Map());
   const ParentBlock = useRef(null);
 
+  let { mutate: joeyyyy } = useMutation({
+    mutationFn: (body: any) =>
+      fetch("/add-log", { method: "POST", body: JSON.stringify(body) }).then(
+        (res) => res.text()
+      ),
+
+    onSuccess(data, variables, context) {
+      // will think later .....
+      if (data === "Hi mom") {
+        alert("Seats are booked");
+        queryClient.invalidateQueries({
+          queryKey: ["Seats"],
+        });
+      }
+    },
+  });
+
   const decideWhichSeatsAreBooked = () => {
     const container = new Map();
-
 
     let all_child_elems = ParentBlock.current.getElementsByTagName("*");
 
@@ -90,16 +108,35 @@ const Seats = () => {
       }
     }
 
-    
-    for (let [ seat_no, is_booked_already ] of Object.entries(seats_list.seats)) {
+    for (let [seat_no, is_booked_already] of Object.entries(seats_list.seats)) {
       if (is_booked_already) {
         container.delete(Number(seat_no));
       }
-    } 
-
-    console.log(container);
-
+    }
+    const object_to_send = {} as any;
+    const foo = Object.fromEntries(container);
+    object_to_send.seats = foo;
+    object_to_send.time_id = time_id;
+    object_to_send.movie_id = id;
+    object_to_send.location_id = locid;
+    joeyyyy(object_to_send);
   };
+
+  let {
+    isError: is_booking_err,
+    isSuccess: can_i_book,
+    data: users_username,
+  } = useQuery({
+    queryKey: ["decider of booking seats"],
+    queryFn: () =>
+      fetch("/login-access").then((res) => {
+        if (!res.ok) {
+          throw new Error("cant");
+        }
+
+        return res.text();
+      }),
+  });
 
   return (
     <>
@@ -119,9 +156,17 @@ const Seats = () => {
             ))}
         </div>
 
-        <button>Cancel Booking</button>
+        {is_booking_err && <p>Sorry, you cant book without logging in :)</p>}
 
-        <button onClick={() => decideWhichSeatsAreBooked()} >Pay for booked tickets ... </button>
+        {can_i_book && (
+          <>
+            <button>Cancel Booking</button>
+
+            <button onClick={() => decideWhichSeatsAreBooked()}>
+              Pay for booked tickets ...{" "}
+            </button>
+          </>
+        )}
       </div>
     </>
   );

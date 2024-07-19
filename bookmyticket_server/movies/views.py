@@ -1,8 +1,11 @@
 from django.shortcuts import render
-from .models import Movie, Location, Time
-from django.http import JsonResponse, HttpResponse
+from .models import Movie, Location, Time, Logs
+from django.http import JsonResponse, HttpResponse, Http404
 from .serializers import MovieSerializer, LocationSerializer, TimeSerializer
-
+from rest_framework.parsers import JSONParser
+from django.views.decorators.csrf import csrf_exempt
+from django.contrib.auth import authenticate, login, logout, models
+import json
 
 def homepage(request):
     spam = { "foo": 2 }
@@ -25,7 +28,7 @@ def locationPage(request, movie, id):
     return render(request, "movies/index.html", spam)
 
 
-def seatPage(request, movie_name, movie_id, location, location_id):
+def seatPage(request, movie_name, movie_id, location, location_id, timeid):
     spam = { "foo": 2 }
 
     return render(request, "movies/index.html", spam)
@@ -53,3 +56,98 @@ def getLocations(request, movie_id):
     return JsonResponse(serializer.data, safe=False)
 
 
+@csrf_exempt
+def login_user(request):
+    if request.method == "POST":
+        data = JSONParser().parse(request)
+        user = authenticate(username=data["username"], password=data["password"])
+        if user is not None:
+            login(request, user)
+            return HttpResponse("Success!")
+        else:
+            raise Http404("Failed authentication")
+
+
+@csrf_exempt
+def create_user_account(request):
+    if request.method == "POST":
+        data = JSONParser().parse(request)
+        try:
+            models.User.objects.create_user(username=data["username"], password=data["password"])
+        except:
+            return HttpResponse("username already exists")
+
+        return HttpResponse("user created")
+
+def try_logout(request):
+    logout(request)
+    return HttpResponse("Logged out!")
+
+def login_access(request):
+    if not request.user.is_authenticated:
+        raise Http404("User isnt logged in")
+    else:
+        # https://docs.djangoproject.com/en/5.0/ref/contrib/auth/#django.contrib.auth.models.User.get_username
+        return HttpResponse(request.user.get_username())
+
+
+
+
+@csrf_exempt
+def addLog(request):
+    if request.method == "POST" and request.user.is_authenticated:
+        data = JSONParser().parse(request)
+
+        # save it to Logs
+        b = Logs(seats_he_booked = data, username = request.user.get_username())
+        b.save()
+         
+        # modify the original
+        a = Time.objects.get(id = int(data["time_id"]))
+        for key, value in data["seats"].items():
+            a.seats[key] = value
+
+
+        a.save()
+        return HttpResponse("Hi mom")
+    
+
+
+
+@csrf_exempt
+def getAllTickets(request):
+    if request.method == "POST" and request.user.is_authenticated:
+        obj_to_send = []
+        initial = Logs.objects.filter(username = request.user.get_username())
+        for x in initial:
+            init = {}
+            init['time_id'] = x.seats_he_booked['time_id']
+            init['movie_id'] = x.seats_he_booked['movie_id']
+            init['location_id'] = x.seats_he_booked['location_id']
+            init['seats'] = x.seats_he_booked['seats']
+            obj_to_send.append(init)
+
+
+        for x in obj_to_send:
+            x["starting_time"] = Time.objects.get(id = x['time_id']).startTime.strftime("%H:%M, %m/%d/%Y")
+            spam = Location.objects.get(id = x['location_id'])
+            x['hallName'] = spam.hallName
+            x['address'] = spam.address
+            x['film_name'] = Movie.objects.get(id = x['movie_id']).name
+
+
+        obj_to_send = json.dumps(obj_to_send)
+        obj_to_send = json.loads(obj_to_send)
+        return JsonResponse(obj_to_send, safe=False)
+
+
+
+    else:
+        return Http404("User not logged in")
+    
+
+
+def auserpage(request, user):
+    spam = { "foo": 2 }
+
+    return render(request, "movies/index.html", spam)

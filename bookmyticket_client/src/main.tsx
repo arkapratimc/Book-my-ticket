@@ -7,6 +7,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Navbar } from "./components/navbar/Navbar.js";
 import { Seats } from "./pages/Seats.js";
+import { UserTickets } from "./pages/UserTickets.js";
 
 const queryClient = new QueryClient();
 
@@ -21,8 +22,12 @@ let router = createBrowserRouter([
         element: <Location />,
       },
       {
-        path: ":movie/:id/:location/:time_id",
+        path: ":movie/:id/:location/:locid/:time_id",
         element: <Seats />,
+      },
+      {
+        path: ":user",
+        element: <UserTickets />,
       },
     ],
   },
