@@ -54,3 +54,9 @@ class Time(models.Model):
     
 
 
+class Logs(models.Model):
+    username = models.CharField(max_length=500)
+    seats_he_booked = models.JSONField()
+
+    def __str__(self):
+        return "{0}".format(self.username)

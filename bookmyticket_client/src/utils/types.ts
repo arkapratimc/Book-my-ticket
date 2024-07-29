@@ -31,5 +31,10 @@ type Time = {
 
 type SeatsType = Time[];
 
+type loginErrorMessages = {
+    username: boolean;
+    password: boolean;
+};
 
-export { type Movie, type Movies, type Locations, type Location, type Time, type SeatsType };
+
+export { type Movie, type Movies, type Locations, type Location, type Time, type SeatsType, type loginErrorMessages };
