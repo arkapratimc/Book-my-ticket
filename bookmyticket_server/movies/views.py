@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from .models import Movie, Location, Time, Logs
-from django.http import JsonResponse, HttpResponse, Http404
+from django.http import JsonResponse, HttpResponse, Http404, HttpResponseNotFound
 from .serializers import MovieSerializer, LocationSerializer, TimeSerializer
 from rest_framework.parsers import JSONParser
 from django.views.decorators.csrf import csrf_exempt
@@ -85,7 +85,7 @@ def try_logout(request):
 
 def login_access(request):
     if not request.user.is_authenticated:
-        raise Http404("User isnt logged in")
+        return HttpResponseNotFound("User isnt logged in")
     else:
         # https://docs.djangoproject.com/en/5.0/ref/contrib/auth/#django.contrib.auth.models.User.get_username
         return HttpResponse(request.user.get_username())

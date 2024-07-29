@@ -112,6 +112,10 @@ const Navbar = () => {
       } else {
         setAuthMessage(AUTH_STATES.successful);
       }
+
+      queryClient.invalidateQueries({
+        queryKey: ["get username"]
+      })
     },
   });
 
@@ -242,15 +246,20 @@ const Navbar = () => {
         }
         return res.text();
       }),
+    retry: false,
   });
 
   let { mutate: log_user_out } = useMutation({
-    mutationFn: () => fetch("/logout/").then((res) => res.text()),
+    mutationFn: () => fetch("/logout").then((res) => res.text()),
     onSuccess(data, variables, context) {
       if (data === "Logged out!") {
         queryClient.invalidateQueries({
           queryKey: ["Seats"],
         });
+
+        queryClient.invalidateQueries({
+          queryKey: ["get username"],
+        })
       }
     },
   });
@@ -264,7 +273,9 @@ const Navbar = () => {
             a__dialog.current.showModal();
           }}
         >
-          {unlogged && "Please sign in to book"}
+          {/* hmm ?? */}
+          {unlogged &&
+            "Please sign in to book"}
           {usrname_from_server_success && `Hi ${username_from_server}`}
         </button>
 
@@ -310,7 +321,7 @@ const Navbar = () => {
           <>
             <button
               onClick={() => {
-                log_user_out()
+                log_user_out();
               }}
             >
               Logout
