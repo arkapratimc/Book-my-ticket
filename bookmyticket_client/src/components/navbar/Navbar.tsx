@@ -100,22 +100,31 @@ const Navbar = () => {
     setErrorState(clonedStateObject);
   };
 
-  const { mutate: joey } = useMutation({
+  const { mutate: joey, isError } = useMutation({
     mutationFn: (body: any) =>
       fetch("/try-login", { method: "POST", body: JSON.stringify(body) }).then(
-        (res) => res.text()
+        (res) => {
+          if (!res.ok) {
+            throw new Error("Failed authentication");
+          }
+
+          return res.text();
+        }
       ),
 
     onSuccess(data, variables, context) {
-      if (data === "Failed authentication") {
-        setAuthMessage(AUTH_STATES.failed);
-      } else {
-        setAuthMessage(AUTH_STATES.successful);
-      }
+      setAuthMessage(AUTH_STATES.successful);
 
       queryClient.invalidateQueries({
-        queryKey: ["get username"]
-      })
+        queryKey: ["get username"],
+      });
+    },
+
+    onError(err, variables, context) {
+      setAuthMessage(AUTH_STATES.failed);
+      queryClient.invalidateQueries({
+        queryKey: ["get username"],
+      });
     },
   });
 
@@ -259,7 +268,7 @@ const Navbar = () => {
 
         queryClient.invalidateQueries({
           queryKey: ["get username"],
-        })
+        });
       }
     },
   });
@@ -274,8 +283,7 @@ const Navbar = () => {
           }}
         >
           {/* hmm ?? */}
-          {unlogged &&
-            "Please sign in to book"}
+          {unlogged && "Please sign in to book"}
           {usrname_from_server_success && `Hi ${username_from_server}`}
         </button>
 
