@@ -113,12 +113,21 @@ const Seats = () => {
         container.delete(Number(seat_no));
       }
     }
+
+    if (container.size === 0) {
+      alert("Please select the seats!!");
+      return;
+    }
+
     const object_to_send = {} as any;
     const foo = Object.fromEntries(container);
     object_to_send.seats = foo;
     object_to_send.time_id = time_id;
     object_to_send.movie_id = id;
     object_to_send.location_id = locid;
+
+    
+
     joeyyyy(object_to_send);
   };
 
