@@ -17,25 +17,28 @@ function App() {
   });
   return (
     <>
-      <h1>Book My Ticket</h1>
       {/* TODO: Enhance Types & states */}
-      <div className={styles.container}>
-        {is_movies_pending && <p>Pending ....</p>}
-        {is_movies_err && <p style={{ color: "red" }}>{movies_err.message}</p>}
+      <div style={{ padding: "0px 30px" }}>
+        <div className={styles.container}>
+          {is_movies_pending && <p>Pending ....</p>}
+          {is_movies_err && (
+            <p style={{ color: "red" }}>{movies_err.message}</p>
+          )}
 
-        {is_movies_success &&
-          movies_data.map((card) => (
-            <Card
-              id={card.id}
-              name={card.name}
-              description={card.description}
-              runtime={card.runtime}
-              rating={card.rating}
-              cover={card.cover}
-              poster={card.poster}
-              key={card.id}
-            />
-          ))}
+          {is_movies_success &&
+            movies_data.map((card) => (
+              <Card
+                id={card.id}
+                name={card.name}
+                description={card.description}
+                runtime={card.runtime}
+                rating={card.rating}
+                cover={card.cover}
+                poster={card.poster}
+                key={card.id}
+              />
+            ))}
+        </div>
       </div>
     </>
   );
