@@ -28,7 +28,7 @@ const Login = ({
   return (
     <>
       <form onSubmit={(event) => handleLogFunc(event)}>
-        <label>
+        <label style={{ display: "block", marginBottom: "5px" }}>
           Username
           <input
             type="text"
@@ -41,9 +41,13 @@ const Login = ({
           <p style={{ color: "red" }}>Please write a valid username</p>
         )}
 
-        <label>
+        <label style={{ display: "block", marginBottom: "5px" }}>
           Password
-          <input type="password" name={LOGIN_FIELD_NAMES.password} />
+          <input
+            type="password"
+            placeholder="Password"
+            name={LOGIN_FIELD_NAMES.password}
+          />
         </label>
 
         {errorState.password && (
@@ -294,14 +298,22 @@ const Navbar = () => {
       <hr />
 
       <dialog ref={a__dialog}>
-        <button
-          onClick={() => {
-            a__dialog.current.close();
+        <div
+          style={{
+            marginBottom: "5px",
+            display: "flex",
+            justifyContent: "space-between",
           }}
         >
-          Close
-        </button>
-
+          <div></div>
+          <button
+            onClick={() => {
+              a__dialog.current.close();
+            }}
+          >
+            Close
+          </button>
+        </div>
         {unlogged && (
           <Login
             handleLogFunc={handle_login}
@@ -339,19 +351,35 @@ const Navbar = () => {
       </dialog>
 
       <dialog ref={b__dialog}>
-        <button onClick={() => b__dialog.current.close()}>Close</button>
-
+        <div
+          style={{
+            marginBottom: "5px",
+            display: "flex",
+            justifyContent: "space-between",
+          }}
+        >
+          <div></div>
+          <button onClick={() => b__dialog.current.close()}>Close</button>
+        </div>
         <form onSubmit={(event) => handle_user_creation(event)}>
-          <label>
+          <label style={{ display: "block", marginBottom: "5px" }}>
             Username
-            <input type="text" name={CREATE_USER_FIELD_NAMES.username} />
+            <input
+              type="text"
+              name={CREATE_USER_FIELD_NAMES.username}
+              placeholder="Username"
+            />
           </label>
           {createAccErrorState.username && (
             <p style={{ color: "red" }}>Please write a valid username</p>
           )}
-          <label>
+          <label style={{ display: "block", marginBottom: "5px" }}>
             Password
-            <input type="password" name={CREATE_USER_FIELD_NAMES.password} />
+            <input
+              type="password"
+              name={CREATE_USER_FIELD_NAMES.password}
+              placeholder="Password"
+            />
           </label>
           {createAccErrorState.password && (
             <p style={{ color: "red" }}>Please write a valid password</p>
