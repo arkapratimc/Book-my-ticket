@@ -21,7 +21,6 @@ const Location = () => {
 
   return (
     <>
-      Hi mom. Film's name - {movie.replaceAll("-", " ")}
       <Hero id={Number(id)} />
       {is_locations_pending && <p>Pending ... </p>}
       {is_locations_err && (
