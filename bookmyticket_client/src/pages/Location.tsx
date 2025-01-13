@@ -8,6 +8,7 @@ import { useState } from "react";
 const Location = () => {
   let { movie, id } = useParams();
   let [selectedDate, setSelectedDate] = useState(null);
+  let [selectedDateID, setSelectedDateID] = useState(null);
   let {
     isError: is_locations_err,
     error: locations_err,
@@ -15,11 +16,10 @@ const Location = () => {
     isPending: is_locations_pending,
     data: locations_list,
   } = useQuery({
-    queryKey: ["Locations"],
+    queryKey: ["Dates"],
     queryFn: (): Promise<HappenningDate[]> =>
       fetch(`/get-every-dates/${id}`).then((res) => res.json()),
   });
-  console.log(locations_list);
   return (
     <>
       <Hero id={Number(id)} />
@@ -51,6 +51,7 @@ const Location = () => {
                   }}
                   onClick={() => {
                     setSelectedDate(date.happening_date);
+                    selectedDateID(date.id);
                   }}
                 >
                   {dateyy.getDate()}{" "}
@@ -60,21 +61,36 @@ const Location = () => {
             );
           })}
       </div>
-      <hr />
-      <div>
-
-      </div>
+      {is_locations_success && (
+        <>
+          <hr />
+          <div>
+            <AllTheLocations
+              date_id={
+                selectedDateID === null ? locations_list[0].id : selectedDateID
+              }
+            />
+          </div>
+        </>
+      )}
     </>
   );
 };
 
-const AllTheLocations = () => {
-
-
-  return <></>
+const AllTheLocations = ({ date_id }: { date_id: number }) => {
+  let {
+    isError: is_locations_err,
+    error: locations_err,
+    isSuccess: is_locations_success,
+    isPending: is_locations_pending,
+    data: locations_list,
+  } = useQuery({
+    queryKey: ["Locations"],
+    queryFn: (): Promise<Locations> =>
+      fetch(`/get-locations/${date_id}`).then((res) => res.json()),
+  });
+  console.log(is_locations_success && locations_list);
+  return <></>;
 };
-
-
-
 
 export { Location };

@@ -56,7 +56,7 @@ def getEveryDates(request, id):
 
 
 def getLocations(request, movie_id):
-    locations = Location.objects.filter(movie__id = movie_id)
+    locations = Location.objects.filter(date__id = movie_id)
     serializer = LocationSerializer(locations, many = True)
 
     return JsonResponse(serializer.data, safe=False)
