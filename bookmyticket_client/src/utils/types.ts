@@ -10,7 +10,11 @@ type Movie = {
 
 type Movies = Array<Movie>;
 
-
+type HappenningDate = {
+    id: number;
+    happening_date: string,
+    movie_id: number;
+}
 
 type Location = {
     id: number;
@@ -37,4 +41,4 @@ type loginErrorMessages = {
 };
 
 
-export { type Movie, type Movies, type Locations, type Location, type Time, type SeatsType, type loginErrorMessages };
+export { type Movie, type Movies, type Locations, type Location, type Time, type SeatsType, type loginErrorMessages, type HappenningDate };

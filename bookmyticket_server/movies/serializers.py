@@ -1,7 +1,10 @@
 from rest_framework import serializers
-from .models import Movie, Location, Time
+from .models import Movie, Location, Time, Dates
 
-
+class DatesSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Dates
+        fields = "__all__"
 
 class MovieSerializer(serializers.ModelSerializer):
     class Meta:

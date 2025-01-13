@@ -1,7 +1,7 @@
 from django.shortcuts import render
-from .models import Movie, Location, Time, Logs
+from .models import Movie, Location, Time, Logs, Dates
 from django.http import JsonResponse, HttpResponse, Http404, HttpResponseNotFound
-from .serializers import MovieSerializer, LocationSerializer, TimeSerializer
+from .serializers import MovieSerializer, LocationSerializer, TimeSerializer, DatesSerializer
 from rest_framework.parsers import JSONParser
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth import authenticate, login, logout, models
@@ -45,6 +45,12 @@ def getSpecSeat(request, time_id):
 def getASpecificMovie(request, id):
     movie = Movie.objects.get(id = id)
     serializer = MovieSerializer(movie, many = False)
+
+    return JsonResponse(serializer.data, safe=False) 
+
+def getEveryDates(request, id):
+    movie = Dates.objects.filter(movie__id = id)
+    serializer = DatesSerializer(movie, many = True)
 
     return JsonResponse(serializer.data, safe=False) 
 
