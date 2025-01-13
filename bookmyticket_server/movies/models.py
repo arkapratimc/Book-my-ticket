@@ -18,7 +18,11 @@ class Movie(models.Model):
         return "{0}".format(self.name)
 
 
-
+class Dates(models.Model):
+    happening_date = models.DateTimeField()
+    movie = models.ForeignKey(Movie, on_delete=models.CASCADE)
+    def __str__(self):
+        return "{0}".format(self.happening_date)
 
 
 class Location(models.Model):
@@ -28,7 +32,7 @@ class Location(models.Model):
     # endTime = models.DateTimeField()
 
     # foreign key column
-    movie = models.ForeignKey(Movie, on_delete=models.CASCADE)
+    date = models.ForeignKey(Dates, on_delete=models.CASCADE)
 
 
     def __str__(self):
@@ -37,7 +41,6 @@ class Location(models.Model):
 
 def foo():
     return { 1: False, 2: False, 3: False, 4: False, 5: False, 6: False, 7: False, 8: False, 9: False, 10: False }
-
 
 
 class Time(models.Model):
