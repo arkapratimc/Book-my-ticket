@@ -30,12 +30,17 @@ def locationPage(request, movie, id):
 
     return render(request, "movies/index.html", spam)
 
-
-def seatPage(request, movie_name, movie_id, location, location_id, timeid):
+def seatPage(request, movie, id, occur_id):
     spam = { "foo": 2 }
 
     return render(request, "movies/index.html", spam)
 
+'''
+def seatPage(request, movie_name, movie_id, location, location_id, timeid):
+    spam = { "foo": 2 }
+
+    return render(request, "movies/index.html", spam)
+'''
 
 
 def getSpecSeat(request, time_id):

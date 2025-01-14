@@ -138,10 +138,10 @@ const Seats = () => {
 
     
 
-    joeyyyy(object_to_send);
+    // joeyyyy(object_to_send);
   }; */
 
-  /* let {
+  let {
     isError: is_booking_err,
     isSuccess: can_i_book,
     data: users_username,
@@ -155,7 +155,8 @@ const Seats = () => {
 
         return res.text();
       }),
-  }); */
+    retry: false
+  }); 
 
   return (
     <>
@@ -182,7 +183,7 @@ const Seats = () => {
             })}
         </div>
 
-        {/* is_booking_err && <p>Sorry, you cant book without logging in :)</p> */}
+        {is_booking_err && <p>Sorry, you cant book without logging in :)</p>}
 
         {/* can_i_book && (
           <>

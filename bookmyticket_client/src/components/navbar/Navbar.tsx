@@ -122,6 +122,10 @@ const Navbar = () => {
       queryClient.invalidateQueries({
         queryKey: ["get username"],
       });
+
+      queryClient.invalidateQueries({
+        queryKey: ["decider of booking seats"],
+      });
     },
 
     onError(err, variables, context) {
@@ -272,6 +276,10 @@ const Navbar = () => {
 
         queryClient.invalidateQueries({
           queryKey: ["get username"],
+        });
+
+        queryClient.invalidateQueries({
+          queryKey: ["decider of booking seats"],
         });
       }
     },

@@ -18,6 +18,7 @@ urlpatterns = [
     path("add-log", views.addLog, name="add log"),
     path("get-user-bookings", views.getAllTickets, name="get all tickets"),
     path("<movie>/<int:id>", views.locationPage, name="Location"),
+    path("<movie>/<int:id>/<int:occur_id>", views.seatPage, name="seat page"),
     path("<movie_name>/<int:movie_id>/<location>/<int:location_id>/<int:timeid>", views.seatPage, name="Location"),
     path("<user>", views.auserpage, name="a user page"),
 ]
