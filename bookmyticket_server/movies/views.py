@@ -1,7 +1,7 @@
 from django.shortcuts import render
-from .models import Movie, Location, Time, Logs, Dates
+from .models import Movie, Logs
 from django.http import JsonResponse, HttpResponse, Http404, HttpResponseNotFound
-from .serializers import MovieSerializer, LocationSerializer, TimeSerializer, DatesSerializer
+from .serializers import MovieSerializer
 from rest_framework.parsers import JSONParser
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth import authenticate, login, logout, models
@@ -22,11 +22,12 @@ def getAllMovies(request):
     serializer = MovieSerializer(spam, many = True)
     return JsonResponse(serializer.data, safe=False)
 
+'''
 def locationPage(request, movie, id):
     spam = { "foo": 2 }
 
     return render(request, "movies/index.html", spam)
-
+'''
 
 def seatPage(request, movie_name, movie_id, location, location_id, timeid):
     spam = { "foo": 2 }
@@ -48,19 +49,23 @@ def getASpecificMovie(request, id):
 
     return JsonResponse(serializer.data, safe=False) 
 
+
+'''
 def getEveryDates(request, id):
     movie = Dates.objects.filter(movie__id = id)
     serializer = DatesSerializer(movie, many = True)
 
     return JsonResponse(serializer.data, safe=False) 
+'''
 
 
+'''
 def getLocations(request, movie_id):
     locations = Location.objects.filter(date__id = movie_id)
     serializer = LocationSerializer(locations, many = True)
 
     return JsonResponse(serializer.data, safe=False)
-
+'''
 
 @csrf_exempt
 def login_user(request):

@@ -18,43 +18,19 @@ class Movie(models.Model):
         return "{0}".format(self.name)
 
 
-class Dates(models.Model):
-    happening_date = models.DateTimeField()
-    movie = models.ForeignKey(Movie, on_delete=models.CASCADE)
-    def __str__(self):
-        return "{0}".format(self.happening_date)
-
-
-class Location(models.Model):
-    hallName = models.CharField(max_length=200)
-    address = models.CharField(max_length=500)
-    # startTime = models.DateTimeField()
-    # endTime = models.DateTimeField()
-
-    # foreign key column
-    date = models.ForeignKey(Dates, on_delete=models.CASCADE)
-
-
-    def __str__(self):
-        return "{0}".format(self.hallName)
-
-
 def foo():
     return { 1: False, 2: False, 3: False, 4: False, 5: False, 6: False, 7: False, 8: False, 9: False, 10: False }
 
-
-class Time(models.Model):
-    startTime = models.DateTimeField()
-    endTime = models.DateTimeField()
-
+class TimeAndPlace(models.Model):
+    occurence = models.DateTimeField()
+    movie = models.ForeignKey(Movie, on_delete=models.CASCADE)
+    hallName = models.CharField(max_length=200)
+    address = models.CharField(max_length=500)
     seats = models.JSONField(default=foo)
 
-
-    location = models.ForeignKey(Location, on_delete=models.CASCADE, related_name='time')
-
     def __str__(self):
-        return "Started at - {0}, Ends at - {1}".format(self.startTime, self.endTime)
-    
+        return "{0} happening at {1}, {2}".format(self.occurence, self.hallName, self.address)
+
 
 
 class Logs(models.Model):
