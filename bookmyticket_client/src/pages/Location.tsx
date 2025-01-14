@@ -1,10 +1,14 @@
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { Hero } from "../components/herosection/Hero.js";
 import { useQuery } from "@tanstack/react-query";
-import { type Locations, type HappenningDate, type Occurence } from "../utils/types.js";
+import {
+  type Locations,
+  type HappenningDate,
+  type Occurence,
+} from "../utils/types.js";
 import { Place } from "../components/places/Place.js";
 import { useState } from "react";
-import { unusualMap, yetanotherUnusualMap } from "../utils/constants.js";
+import { unusualMap } from "../utils/constants.js";
 
 const Location = () => {
   let { movie, id } = useParams();
@@ -21,7 +25,7 @@ const Location = () => {
     queryFn: (): Promise<Occurence[]> =>
       fetch(`/get-every-occurences/${id}`).then((res) => res.json()),
   });
-  console.log(is_locations_success && yetanotherUnusualMap(unusualMap(locations_list)));
+  // console.log(is_locations_success && unusualMap(locations_list));
 
   return (
     <>
@@ -63,7 +67,38 @@ const Location = () => {
               </>
             );
           }) */}
+        {is_locations_success &&
+          unusualMap(locations_list).map((element) => {
+            let date = new Date();
+            let today = `${date.getDate()} ${date.toLocaleString("default", {
+              month: "long",
+            })}`;
+            let is_it_today = today === element[0];
+
+            return (
+              <>
+                <div
+                  style={{
+                    color: `${
+                      selectedDate === null && is_it_today // it represents normal
+                        ? "red"
+                        : selectedDate !== null && selectedDate === element[0]
+                        ? "red"
+                        : "black"
+                    }`,
+                  }}
+                  onClick={() => {
+                    setSelectedDate(element[0]);
+                    // selectedDateID(date.id);
+                  }}
+                >
+                  {element[0]}
+                </div>
+              </>
+            );
+          })}
       </div>
+      <hr />
       {/* is_locations_success && (
         <>
           <hr />
@@ -76,24 +111,54 @@ const Location = () => {
           </div>
         </>
       ) */}
+      {is_locations_success && (
+        <AllTheLocations
+          locations={unusualMap(locations_list).find((element) => {
+            let date = new Date();
+            let today = `${date.getDate()} ${date.toLocaleString("default", {
+              month: "long",
+            })}`;
+            let is_it_today = today === element[0];
+            if (selectedDate === null && is_it_today) {
+              return element[1];
+            }
+            if (selectedDate !== null && selectedDate === element[0]) {
+              return element[1];
+            }
+          })}
+          metadata={{
+            movie,
+            id
+          }}
+        />
+      )}
     </>
   );
 };
 
-const AllTheLocations = ({ date_id }: { date_id: number }) => {
-  let {
-    isError: is_locations_err,
-    error: locations_err,
-    isSuccess: is_locations_success,
-    isPending: is_locations_pending,
-    data: locations_list,
-  } = useQuery({
-    queryKey: ["Locations"],
-    queryFn: (): Promise<Locations> =>
-      fetch(`/get-locations/${date_id}`).then((res) => res.json()),
-  });
-  console.log(is_locations_success && locations_list);
-  return <></>;
+const AllTheLocations = ({ locations, metadata }) => {
+  // console.log(locations[1]);
+  const navigate = useNavigate();
+  return (
+    <>
+      {locations[1].map((location) => {
+        return (
+          <>
+            <div style={{ border: `1px solid red` }}>
+              {location[0]}
+              <ul>
+                {location[1].map((x) => {
+                  return <li onClick={() => {
+                    navigate(`/${metadata.movie}/${metadata.id}/${x.id}`);
+                  }}>{x.time}</li>;
+                })}
+              </ul>
+            </div>
+          </>
+        );
+      })}
+    </>
+  );
 };
 
 export { Location };

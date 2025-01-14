@@ -9,6 +9,7 @@ urlpatterns = [
     # path("get-every-dates/<int:id>", views.getEveryDates, name="get every dates for a movie"),
     # path("get-locations/<int:movie_id>", views.getLocations, name="Get Locations"),
     path("get-every-occurences/<int:movie_id>", views.getEveryOccurences, name="get every occurences"),
+    path("get-seats/<int:occur_id>", views.getAspecificOccurence, name="get all seats"),
     path("get-specific-seat/<int:time_id>", views.getSpecSeat, name="get specific seats"),
     path("try-login", views.login_user, name="login"),
     path("login-access", views.login_access, name = "check whether the user is logged or not"),

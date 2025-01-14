@@ -49,7 +49,7 @@ const Seat = ({
 const Seats = () => {
   // useQueryClient hook
   let queryClient = useQueryClient();
-  let { time_id, locid, id } = useParams();
+  let { movie, id, occur_id } = useParams();
 
   // https://jsbin.com/yinawufeqe/3/edit?js,output
   /* let {
@@ -63,8 +63,18 @@ const Seats = () => {
     queryFn: (): Promise<Locations> =>
       fetch(`/get-locations/${id}`).then((res) => res.json()),
   }); */
-
   let {
+    isError: is_occurence_err,
+    error: occurence_error,
+    isSuccess: is_occurence_success,
+    isPending: is_occurence_pending,
+    data: specific_occurence,
+  } = useQuery({
+    queryKey: ["a specific occurence"],
+    queryFn: () => fetch(`/get-seats/${occur_id}`).then((res) => res.json()),
+  });
+  // console.log(is_occurence_success && specific_occurence);
+  /* let {
     isError: is_seat_err,
     error: seat_err,
     isSuccess: is_seat_success,
@@ -74,12 +84,12 @@ const Seats = () => {
     queryKey: ["Seats"],
     queryFn: (): Promise<Time> =>
       fetch(`/get-specific-seat/${time_id}`).then((res) => res.json()),
-  });
+  }); */
 
   // const container = useRef(new Map());
   const ParentBlock = useRef(null);
 
-  let { mutate: joeyyyy } = useMutation({
+  /*let { mutate: joeyyyy } = useMutation({
     mutationFn: (body: any) =>
       fetch("/add-log", { method: "POST", body: JSON.stringify(body) }).then(
         (res) => res.text()
@@ -94,9 +104,9 @@ const Seats = () => {
         });
       }
     },
-  });
+  }); */
 
-  const decideWhichSeatsAreBooked = () => {
+  /* const decideWhichSeatsAreBooked = () => {
     const container = new Map();
 
     let all_child_elems = ParentBlock.current.getElementsByTagName("*");
@@ -129,9 +139,9 @@ const Seats = () => {
     
 
     joeyyyy(object_to_send);
-  };
+  }; */
 
-  let {
+  /* let {
     isError: is_booking_err,
     isSuccess: can_i_book,
     data: users_username,
@@ -145,13 +155,13 @@ const Seats = () => {
 
         return res.text();
       }),
-  });
+  }); */
 
   return (
     <>
       <div className="display-seats">
-        {is_seat_pending && <p>Pending ... </p>}
-        {is_seat_err && <p style={{ color: "red" }}>{seat_err.message}</p>}
+        {/* is_seat_pending && <p>Pending ... </p> */}
+        {/* is_seat_err && <p style={{ color: "red" }}>{seat_err.message}</p> */}
         <div
           style={{
             display: "grid",
@@ -159,15 +169,22 @@ const Seats = () => {
           }}
           ref={ParentBlock}
         >
-          {is_seat_success &&
-            Object.keys(seats_list.seats).map((seat, index) => (
-              <Seat value={seat} key={index} rawSeatObject={seats_list.seats} />
-            ))}
+          {is_occurence_success &&
+            Object.keys(specific_occurence.seats).map((seat, index) => {
+              console.log("h");
+              return (
+                <Seat
+                  value={seat}
+                  key={index}
+                  rawSeatObject={specific_occurence.seats}
+                />
+              );
+            })}
         </div>
 
-        {is_booking_err && <p>Sorry, you cant book without logging in :)</p>}
+        {/* is_booking_err && <p>Sorry, you cant book without logging in :)</p> */}
 
-        {can_i_book && (
+        {/* can_i_book && (
           <>
             <button>Cancel Booking</button>
 
@@ -175,7 +192,7 @@ const Seats = () => {
               Pay for booked tickets ...{" "}
             </button>
           </>
-        )}
+        ) */}
       </div>
     </>
   );

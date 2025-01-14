@@ -58,6 +58,12 @@ def getEveryOccurences(request, movie_id):
     return JsonResponse(serializer.data, safe=False)
 
 
+def getAspecificOccurence(request, occur_id):
+    occurence = TimeAndPlace.objects.get(id = occur_id)
+    serializer = TimeAndPlaceSerializer(occurence, many=False)
+    return JsonResponse(serializer.data, safe=False)
+
+
 '''
 def getEveryDates(request, id):
     movie = Dates.objects.filter(movie__id = id)

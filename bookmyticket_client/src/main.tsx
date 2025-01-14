@@ -22,7 +22,7 @@ let router = createBrowserRouter([
         element: <Location />,
       },
       {
-        path: ":movie/:id/:location/:locid/:time_id",
+        path: ":movie/:id/:occur_id",
         element: <Seats />,
       },
       {

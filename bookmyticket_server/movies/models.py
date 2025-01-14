@@ -19,7 +19,12 @@ class Movie(models.Model):
 
 
 def foo():
-    return { 1: False, 2: False, 3: False, 4: False, 5: False, 6: False, 7: False, 8: False, 9: False, 10: False }
+    my_dict = {}
+    array = list(range(1, 50+1))
+    for item in array:
+        my_dict[item] = False
+    
+    return my_dict
 
 class TimeAndPlace(models.Model):
     occurence = models.DateTimeField()
