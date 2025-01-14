@@ -1,9 +1,10 @@
 import { useParams } from "react-router-dom";
 import { Hero } from "../components/herosection/Hero.js";
 import { useQuery } from "@tanstack/react-query";
-import { type Locations, type HappenningDate } from "../utils/types.js";
+import { type Locations, type HappenningDate, type Occurence } from "../utils/types.js";
 import { Place } from "../components/places/Place.js";
 import { useState } from "react";
+import { unusualMap, yetanotherUnusualMap } from "../utils/constants.js";
 
 const Location = () => {
   let { movie, id } = useParams();
@@ -17,9 +18,11 @@ const Location = () => {
     data: locations_list,
   } = useQuery({
     queryKey: ["Dates"],
-    queryFn: (): Promise<HappenningDate[]> =>
-      fetch(`/get-every-dates/${id}`).then((res) => res.json()),
+    queryFn: (): Promise<Occurence[]> =>
+      fetch(`/get-every-occurences/${id}`).then((res) => res.json()),
   });
+  console.log(is_locations_success && yetanotherUnusualMap(unusualMap(locations_list)));
+
   return (
     <>
       <Hero id={Number(id)} />
@@ -28,7 +31,7 @@ const Location = () => {
         <p style={{ color: "red" }}>{locations_err.message}</p>
       )}
       <div>
-        {is_locations_success &&
+        {/*is_locations_success &&
           locations_list.map((date) => {
             let dateyy = new Date(date.happening_date);
             let is_it_today =
@@ -41,7 +44,7 @@ const Location = () => {
                   style={{
                     color: `${
                       selectedDate === null &&
-                      is_it_today /** it represents normal */
+                      is_it_today // it represents normal 
                         ? "red"
                         : selectedDate !== null &&
                           selectedDate === date.happening_date
@@ -59,9 +62,9 @@ const Location = () => {
                 </div>
               </>
             );
-          })}
+          }) */}
       </div>
-      {is_locations_success && (
+      {/* is_locations_success && (
         <>
           <hr />
           <div>
@@ -72,7 +75,7 @@ const Location = () => {
             />
           </div>
         </>
-      )}
+      ) */}
     </>
   );
 };

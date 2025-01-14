@@ -8,6 +8,14 @@ type Movie = {
     cover: string;
 };
 
+type Occurence = {
+    address: string;
+    hallName: string;
+    id: number;
+    movie: number;
+    occurence: string;
+};
+
 type Movies = Array<Movie>;
 
 type HappenningDate = {
@@ -41,4 +49,4 @@ type loginErrorMessages = {
 };
 
 
-export { type Movie, type Movies, type Locations, type Location, type Time, type SeatsType, type loginErrorMessages, type HappenningDate };
+export { type Movie, type Movies, type Locations, type Location, type Time, type SeatsType, type loginErrorMessages, type HappenningDate, type Occurence };
