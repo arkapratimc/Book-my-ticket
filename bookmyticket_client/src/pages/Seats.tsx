@@ -89,7 +89,7 @@ const Seats = () => {
   // const container = useRef(new Map());
   const ParentBlock = useRef(null);
 
-  /*let { mutate: joeyyyy } = useMutation({
+  let { mutate: joeyyyy } = useMutation({
     mutationFn: (body: any) =>
       fetch("/add-log", { method: "POST", body: JSON.stringify(body) }).then(
         (res) => res.text()
@@ -100,13 +100,13 @@ const Seats = () => {
       if (data === "Hi mom") {
         alert("Seats are booked");
         queryClient.invalidateQueries({
-          queryKey: ["Seats"],
+          queryKey: ["a specific occurence"],
         });
       }
     },
-  }); */
+  });
 
-  /* const decideWhichSeatsAreBooked = () => {
+  const decideWhichSeatsAreBooked = () => {
     const container = new Map();
 
     let all_child_elems = ParentBlock.current.getElementsByTagName("*");
@@ -118,7 +118,7 @@ const Seats = () => {
       }
     }
 
-    for (let [seat_no, is_booked_already] of Object.entries(seats_list.seats)) {
+    for (let [seat_no, is_booked_already] of Object.entries(specific_occurence.seats)) {
       if (is_booked_already) {
         container.delete(Number(seat_no));
       }
@@ -132,14 +132,14 @@ const Seats = () => {
     const object_to_send = {} as any;
     const foo = Object.fromEntries(container);
     object_to_send.seats = foo;
-    object_to_send.time_id = time_id;
+    object_to_send.occur_id = occur_id;
     object_to_send.movie_id = id;
-    object_to_send.location_id = locid;
-
+    
+    // console.log(foo);
     
 
-    // joeyyyy(object_to_send);
-  }; */
+    joeyyyy(object_to_send);
+  };
 
   let {
     isError: is_booking_err,
@@ -172,7 +172,7 @@ const Seats = () => {
         >
           {is_occurence_success &&
             Object.keys(specific_occurence.seats).map((seat, index) => {
-              console.log("h");
+              // console.log("h");
               return (
                 <Seat
                   value={seat}
@@ -185,7 +185,7 @@ const Seats = () => {
 
         {is_booking_err && <p>Sorry, you cant book without logging in :)</p>}
 
-        {/* can_i_book && (
+        {can_i_book && (
           <>
             <button>Cancel Booking</button>
 
@@ -193,7 +193,7 @@ const Seats = () => {
               Pay for booked tickets ...{" "}
             </button>
           </>
-        ) */}
+        )}
       </div>
     </>
   );

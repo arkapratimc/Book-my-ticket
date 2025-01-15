@@ -131,12 +131,21 @@ def addLog(request):
         # save it to Logs
         b = Logs(seats_he_booked = data, username = request.user.get_username())
         b.save()
-         
+
+
+        ''' 
         # modify the original
         a = Time.objects.get(id = int(data["time_id"]))
         for key, value in data["seats"].items():
             a.seats[key] = value
 
+
+        a.save()
+        '''
+        # modify the original
+        a = TimeAndPlace.objects.get(id = int(data["occur_id"]))
+        for key, value in data["seats"].items():
+            a.seats[key] = value
 
         a.save()
         return HttpResponse("Hi mom")
@@ -151,18 +160,19 @@ def getAllTickets(request):
         initial = Logs.objects.filter(username = request.user.get_username())
         for x in initial:
             init = {}
-            init['time_id'] = x.seats_he_booked['time_id']
+            init['occur_id'] = x.seats_he_booked['occur_id']
             init['movie_id'] = x.seats_he_booked['movie_id']
-            init['location_id'] = x.seats_he_booked['location_id']
+            # init['location_id'] = x.seats_he_booked['location_id']
             init['seats'] = x.seats_he_booked['seats']
             obj_to_send.append(init)
 
 
         for x in obj_to_send:
-            x["starting_time"] = Time.objects.get(id = x['time_id']).startTime.strftime("%H:%M, %m/%d/%Y")
-            spam = Location.objects.get(id = x['location_id'])
-            x['hallName'] = spam.hallName
-            x['address'] = spam.address
+            eggs = TimeAndPlace.objects.get(id = x['occur_id'])
+            x["starting_time"] = eggs.occurence.strftime("%H:%M, %m/%d/%Y")
+            # spam = Location.objects.get(id = x['location_id'])
+            x['hallName'] = eggs.hallName
+            x['address'] = eggs.address
             x['film_name'] = Movie.objects.get(id = x['movie_id']).name
 
 
