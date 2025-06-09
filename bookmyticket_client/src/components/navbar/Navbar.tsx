@@ -288,7 +288,10 @@ const Navbar = () => {
   return (
     <>
       <nav className={style.navy}>
+        <NavLink to="/">
+        
         <h1>Book My Ticket</h1>
+        </NavLink>
         <button
           onClick={() => {
             a__dialog.current.showModal();

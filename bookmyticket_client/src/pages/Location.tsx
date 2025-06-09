@@ -25,6 +25,7 @@ const Location = () => {
     queryFn: (): Promise<Occurence[]> =>
       fetch(`/get-every-occurences/${id}`).then((res) => res.json()),
   });
+  const navigate = useNavigate();
   // console.log(is_locations_success && unusualMap(locations_list));
 
   return (
@@ -95,8 +96,12 @@ const Location = () => {
 
                         console.log(idx);
                     return <span
-                      key={idx}
+                      
                       className="bg-yellow-300 text-black px-4 py-2 rounded-lg text-sm font-medium shadow-sm hover:bg-yellow-400 transition"
+                      onClick={() => {
+
+                        navigate(`/${movie}/${id}/${idx.id}`)
+                      }}
                     >
                       {idx.time}
                     </span>
