@@ -68,32 +68,44 @@ const Location = () => {
             );
           }) */}
         {is_locations_success &&
-          unusualMap(locations_list).map((element) => {
-            let date = new Date();
-            let today = `${date.getDate()} ${date.toLocaleString("default", {
-              month: "long",
-            })}`;
-            let is_it_today = today === element[0];
-
+          unusualMap(locations_list).map(([date, occurences]) => {
+            
             return (
               <>
-                <div
+                <section
+                  key={date}
+                  className="bg-white p-6 rounded-xl shadow-lg"
                   style={{
-                    color: `${
-                      selectedDate === null && is_it_today // it represents normal
-                        ? "red"
-                        : selectedDate !== null && selectedDate === element[0]
-                        ? "red"
-                        : "black"
-                    }`,
-                  }}
-                  onClick={() => {
-                    setSelectedDate(element[0]);
-                    // selectedDateID(date.id);
+                    backgroundColor: "white",
+                    padding: "6px",
+                    borderRadius: "10px",
+                    boxShadow: "0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)"
                   }}
                 >
-                  {element[0]}
-                </div>
+                  <h2 className="text-2xl font-bold mb-4 text-blue-600">
+                    {date}
+                  </h2>
+                  <div className="space-y-6">
+                    {occurences.map(([place, times]) => {
+              
+              
+                      return <>
+                      <h3 className="text-xl font-semibold text-gray-800 mb-2">{place}</h3>
+                      {times.map((idx) => {
+
+                        console.log(idx);
+                    return <span
+                      key={idx}
+                      className="bg-yellow-300 text-black px-4 py-2 rounded-lg text-sm font-medium shadow-sm hover:bg-yellow-400 transition"
+                    >
+                      {idx.time}
+                    </span>
+                    })}
+                      
+                      </>
+                    })}
+                  </div>
+                </section>
               </>
             );
           })}
@@ -111,27 +123,7 @@ const Location = () => {
           </div>
         </>
       ) */}
-      {is_locations_success && (
-        <AllTheLocations
-          locations={unusualMap(locations_list).find((element) => {
-            let date = new Date();
-            let today = `${date.getDate()} ${date.toLocaleString("default", {
-              month: "long",
-            })}`;
-            let is_it_today = today === element[0];
-            if (selectedDate === null && is_it_today) {
-              return element[1];
-            }
-            if (selectedDate !== null && selectedDate === element[0]) {
-              return element[1];
-            }
-          })}
-          metadata={{
-            movie,
-            id
-          }}
-        />
-      )}
+      
     </>
   );
 };
@@ -148,9 +140,15 @@ const AllTheLocations = ({ locations, metadata }) => {
               {location[0]}
               <ul>
                 {location[1].map((x) => {
-                  return <li onClick={() => {
-                    navigate(`/${metadata.movie}/${metadata.id}/${x.id}`);
-                  }}>{x.time}</li>;
+                  return (
+                    <li
+                      onClick={() => {
+                        navigate(`/${metadata.movie}/${metadata.id}/${x.id}`);
+                      }}
+                    >
+                      {x.time}
+                    </li>
+                  );
                 })}
               </ul>
             </div>

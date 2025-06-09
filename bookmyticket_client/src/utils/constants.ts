@@ -58,6 +58,7 @@ let unusualMap = (rawInput: Occurence[]) => {
         }
     }
     yetanotherUnusualMap(RESULT);
+    
     return RESULT;
 };
 
