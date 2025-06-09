@@ -171,6 +171,7 @@ const Seats = () => {
           ref={ParentBlock}
         >
           {is_occurence_success &&
+           !console.log(specific_occurence.seats) &&
             Object.keys(specific_occurence.seats).map((seat, index) => {
               // console.log("h");
               return (
