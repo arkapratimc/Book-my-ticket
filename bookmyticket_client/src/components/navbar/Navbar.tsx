@@ -29,7 +29,7 @@ const Login = ({
     <>
     <div style={{
       textAlign: "center",
-      fontSize: "20px",
+      fontSize: "32px",
       fontWeight: "bold",
     }}>Login form</div>
       <form onSubmit={(event) => handleLogFunc(event)}>
@@ -39,6 +39,11 @@ const Login = ({
             type="text"
             placeholder="Username"
             name={LOGIN_FIELD_NAMES.username}
+            style={{
+              display: "block",
+              height: "30px",
+              width: "100%"
+            }}
           />
         </label>
 
@@ -52,6 +57,11 @@ const Login = ({
             type="password"
             placeholder="Password"
             name={LOGIN_FIELD_NAMES.password}
+            style={{
+              display: "block",
+              height: "30px",
+              width: "100%"
+            }}
           />
         </label>
 
@@ -314,7 +324,9 @@ const Navbar = () => {
       </nav>
       <hr />
 
-      <dialog ref={a__dialog}>
+      <dialog ref={a__dialog} style={{
+        width: "330px"
+      }}>
         <div
           style={{
             marginBottom: "5px",
