@@ -1,4 +1,4 @@
-import { NavLink, Outlet } from "react-router-dom";
+import { NavLink, Outlet, useNavigate } from "react-router-dom";
 import style from "./Navbar.module.css";
 import { useRef, useState } from "react";
 import {
@@ -27,6 +27,11 @@ const Login = ({
 }) => {
   return (
     <>
+    <div style={{
+      textAlign: "center",
+      fontSize: "20px",
+      fontWeight: "bold",
+    }}>Login form</div>
       <form onSubmit={(event) => handleLogFunc(event)}>
         <label style={{ display: "block", marginBottom: "5px" }}>
           Username
@@ -61,6 +66,7 @@ const Login = ({
 };
 
 const Navbar = () => {
+  const navigate = useNavigate();
   let queryClient = useQueryClient();
   const a__dialog = useRef(null);
   const b__dialog = useRef(null);
@@ -322,7 +328,10 @@ const Navbar = () => {
               a__dialog.current.close();
             }}
           >
-            Close
+                  <svg viewBox="0 0 10 10" width="24" height="24" stroke="currentColor" strokeWidth="2" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <line x1="1" y1="1" x2="9" y2="9" />
+  <line x1="9" y1="1" x2="1" y2="9" />
+</svg>
           </button>
         </div>
         {unlogged && (
@@ -343,7 +352,18 @@ const Navbar = () => {
               {username_from_server} successfully logged in <Tick />
             </p>
             <p>
-              <NavLink to={username_from_server}>Your bookings</NavLink>
+              <div
+              style={{
+                textDecoration: "underline",
+                textDecorationColor: "blue",
+                color: "blue",
+                cursor: "pointer"
+              }}
+              onClick={() => {
+                navigate(username_from_server);
+                a__dialog.current.close();
+
+              }}>Your bookings</div>
             </p>
           </>
         )}
@@ -370,7 +390,15 @@ const Navbar = () => {
           }}
         >
           <div></div>
-          <button onClick={() => b__dialog.current.close()}>Close</button>
+          <button onClick={() => b__dialog.current.close()}>
+            <svg viewBox="0 0 10 10" width="24" height="24" stroke="currentColor" strokeWidth="2" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <line x1="1" y1="1" x2="9" y2="9" />
+  <line x1="9" y1="1" x2="1" y2="9" />
+</svg>
+
+
+
+          </button>
         </div>
         <form onSubmit={(event) => handle_user_creation(event)}>
           <label style={{ display: "block", marginBottom: "5px" }}>

@@ -12,7 +12,7 @@ const Seat = ({
 }) => {
   let is_already_booked = rawSeatObject[seat_number];
 
-  let seat_colour = is_already_booked ? "green" : "white";
+  let seat_colour = is_already_booked ? "black" : "white";
 
   let ref = useRef(null);
 
@@ -36,7 +36,7 @@ const Seat = ({
   return (
     <>
       <div
-        style={{ backgroundColor: seat_colour }}
+        style={{ backgroundColor: seat_colour, width: "30px", height: "30px", textAlign: "center", lineHeight: "30px", border: "1px solid black" }}
         ref={ref}
         onClick={() => bookHandler(is_already_booked)}
       >
@@ -157,21 +157,31 @@ const Seats = () => {
       }),
     retry: false
   }); 
+  
 
   return (
     <>
+    <div style={{
+      textAlign: "center",
+      fontSize: "32px",
+      fontWeight: "bold"
+    }}>Select Seats</div>
       <div className="display-seats">
         {/* is_seat_pending && <p>Pending ... </p> */}
         {/* is_seat_err && <p style={{ color: "red" }}>{seat_err.message}</p> */}
+        <div style={{
+          marginLeft: "20px",
+          marginRight: "20px"
+        }}>
         <div
           style={{
             display: "grid",
             gridTemplateColumns: "1fr 1fr 1fr 1fr 1fr",
+            gap: "5px"
           }}
           ref={ParentBlock}
         >
           {is_occurence_success &&
-           !console.log(specific_occurence.seats) &&
             Object.keys(specific_occurence.seats).map((seat, index) => {
               // console.log("h");
               return (
@@ -183,7 +193,7 @@ const Seats = () => {
               );
             })}
         </div>
-
+</div>
         {is_booking_err && <p>Sorry, you cant book without logging in :)</p>}
 
         {can_i_book && (
