@@ -126,41 +126,56 @@ function App() {
           {is_movies_success &&
             movies_data.map((card) => (
               <>
-                <div className="event-card" style={{
-                  backgroundColor: "#fff",
-                  borderRadius: "12px",
-                  width: "220px",
-                  textAlign: "center",
-                  padding: "15px",
-                  boxShadow: "0 0 10px rgba(0,0,0,0.1)"
-                }}>
-                  
-                    <img
-                      src={card.poster}
-                      alt={card.name}
-                      onClick={() => navigate(`/${card.name.replaceAll(" ", "-")}/${card.id}`)}
-                      style={{
-                        width: "100%",
-                        borderRadius: "10px"
-                      }}
-                    />
-                  
-                  <h3 style={{
-                    marginTop: "10px"
-                  }}>{card.name}</h3>
-                  <p style={{
-                    color: "#666",
-                    fontSize: "0.9em",
-                    margin: "10px 0px"
-                  }}>EDM Festival | Goa | 15 June</p>
-                  <NavLink to="seats.html" style={{
-                    backgroundColor: "#e50914",
-                    color: "white",
-                    border: "none",
-                    padding: "8px 12px",
-                    borderRadius: "5px",
-                    fontWeight: "bold"
-                  }}>
+                <div
+                  className="event-card"
+                  style={{
+                    backgroundColor: "#fff",
+                    borderRadius: "12px",
+                    width: "220px",
+                    textAlign: "center",
+                    padding: "15px",
+                    boxShadow: "0 0 10px rgba(0,0,0,0.1)",
+                  }}
+                >
+                  <img
+                    src={card.poster}
+                    alt={card.name}
+                    onClick={() =>
+                      navigate(`/${card.name.replaceAll(" ", "-")}/${card.id}`)
+                    }
+                    style={{
+                      width: "100%",
+                      borderRadius: "10px",
+                    }}
+                  />
+
+                  <h3
+                    style={{
+                      marginTop: "10px",
+                    }}
+                  >
+                    {card.name}
+                  </h3>
+                  <p
+                    style={{
+                      color: "#666",
+                      fontSize: "0.9em",
+                      margin: "10px 0px",
+                    }}
+                  >
+                    EDM Festival | Goa | 15 June
+                  </p>
+                  <NavLink
+                    to="seats.html"
+                    style={{
+                      backgroundColor: "#e50914",
+                      color: "white",
+                      border: "none",
+                      padding: "8px 12px",
+                      borderRadius: "5px",
+                      fontWeight: "bold",
+                    }}
+                  >
                     {/** TODO URGENT SPECIAL FIX */}
                     Book Tickets
                   </NavLink>
@@ -170,7 +185,7 @@ function App() {
         </div>
       </section>
 
-      <div
+      {/* <div
         className="event-grid"
         style={{
           display: "flex",
@@ -181,7 +196,82 @@ function App() {
       >
         {is_movies_pending && <p>Pending ....</p>}
         {is_movies_err && <p style={{ color: "red" }}>{movies_err.message}</p>}
-      </div>
+      </div> */}
+
+      <section
+        className="premiere"
+        style={{
+          backgroundColor: "#2b2b2b",
+          color: "#fff",
+          padding: "40px 20px",
+          textAlign: "center",
+        }}
+      >
+        <h2
+          style={{
+            color: "#ff4c4c",
+            fontSize: "2em",
+            marginBottom: "10px",
+          }}
+        >
+          Premieres
+        </h2>
+        <p
+          className="subheading"
+          style={{
+            color: "#aaa",
+            marginBottom: "30px",
+            fontSize: "1em",
+          }}
+        >
+          Brand new releases every Friday
+        </p>
+        <div
+          className="premiere-grid"
+          style={{
+            display: "flex",
+            flexWrap: "wrap",
+            justifyContent: "center",
+            gap: "25px",
+          }}
+        >
+          {is_movies_pending && <p>Pending ....</p>}
+          {is_movies_err && (
+            <p style={{ color: "red" }}>{movies_err.message}</p>
+          )}
+          {is_movies_success &&
+            movies_data.map((card) => (
+              <>
+                <div
+                  className="premiere-card"
+                  style={{
+                    width: "250px",
+                    backgroundColor: "#1f1f1f",
+                    borderRadius: "10px",
+                    overflow: "hidden",
+                    boxShadow: "0 0 10px rgba(0,0,0,0.4)",
+                  }}
+                >
+                  <img src={card.poster} alt={card.name} style={{
+                    width: "100%",
+                    height:"auto",
+                    display: "block"
+                  }} />
+                  <h4 style={{
+                    margin: "15px 10px 5px",
+                    fontSize: "1.1em",
+                    color: "#fff"
+                  }}>{card.name}</h4>
+                  <p style={{
+                    margin: "0 10px 15px",
+                    fontSize: "0.9em",
+                    color: "#ccc"
+                  }}>Drama | Hindi</p>
+                </div>
+              </>
+            ))}
+        </div>
+      </section>
     </>
   );
 }

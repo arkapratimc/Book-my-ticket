@@ -20,9 +20,22 @@ const Hero = ({ id }: { id: number }) => {
       {is_spec_movie_err && (
         <p style={{ color: "red" }}>{spec_movie_err.message}</p>
       )}
-
-      {is_spec_movie_success && (
-        <div
+      <div
+        style={{
+          /* display: "flex",
+        flexWrap: "wrap",
+        background: "white",
+        maxWidth: "1000px",
+        margin: "50px auto",
+        padding: "20px",
+        boxShadow: "0 0 15px rgba(0,0,0,0.1)",
+        borderRadius: "10px" */
+          backgroundColor: "#f4f4f4",
+        }}
+      >
+        {is_spec_movie_success && (
+          <>
+            {/* <div
           style={{
             backgroundImage: `linear-gradient(90deg, rgb(26, 26, 26) 24.97%, rgb(26, 26, 26) 38.3%, rgba(26, 26, 26, 0.04) 97.47%, rgb(26, 26, 26) 100%), url(${
               is_spec_movie_success && spec_movie.poster
@@ -81,8 +94,56 @@ const Hero = ({ id }: { id: number }) => {
             </div>
             <div></div>
           </div>
-        </div>
-      )}
+        </div> */}
+
+            <div
+              style={{
+                display: "flex",
+                flexWrap: "wrap",
+                background: "white",
+                maxWidth: "1000px",
+                margin: "0px auto",
+                padding: "20px",
+                boxShadow: "0 0 15px rgba(0,0,0,0.1)",
+                borderRadius: "10px",
+              }}
+            >
+              <div className="poster">
+                <img
+                  src={spec_movie.poster}
+                  alt={spec_movie.name}
+                  style={{
+                    borderRadius: "10px",
+                    width: "300px",
+                    height: "auto",
+                  }}
+                />
+              </div>
+              <div className="details" style={{
+                flex: "1",
+                marginLeft: "30px",
+
+              }}>
+                <h1 style={{
+                  marginTop: "0px",
+                  color: "#e50914"
+                }}>{spec_movie.name}</h1>
+                <p className="genre" style={{
+                  color: "#888",
+                  fontSize: "0.95em",
+                  marginBottom: "15px"
+                }}>Action | Crime | 2h 07min</p>
+                <p className="description" style={{
+                  marginBottom: "20px",
+                  lineHeight: "1.6"
+                }}>{spec_movie.description}</p>
+
+                
+              </div>
+            </div>
+          </>
+        )}
+      </div>
     </>
   );
 };
