@@ -27,11 +27,15 @@ const Login = ({
 }) => {
   return (
     <>
-    <div style={{
-      textAlign: "center",
-      fontSize: "32px",
-      fontWeight: "bold",
-    }}>Login form</div>
+      <div
+        style={{
+          textAlign: "center",
+          fontSize: "32px",
+          fontWeight: "bold",
+        }}
+      >
+        Login form
+      </div>
       <form onSubmit={(event) => handleLogFunc(event)}>
         <label style={{ display: "block", marginBottom: "5px" }}>
           Username
@@ -42,7 +46,7 @@ const Login = ({
             style={{
               display: "block",
               height: "30px",
-              width: "100%"
+              width: "100%",
             }}
           />
         </label>
@@ -60,7 +64,7 @@ const Login = ({
             style={{
               display: "block",
               height: "30px",
-              width: "100%"
+              width: "100%",
             }}
           />
         </label>
@@ -303,7 +307,7 @@ const Navbar = () => {
 
   return (
     <>
-      <nav className={style.navy}>
+      {/* <nav className={style.navy}>
         <NavLink to="/">
         
         <img src="static/pictures/foo.jpg" alt="Book My Show Logo"  style={{ 
@@ -315,7 +319,7 @@ const Navbar = () => {
             a__dialog.current.showModal();
           }}
         >
-          {/* hmm ?? */}
+          
           {unlogged && "Please sign in to book"}
           {usrname_from_server_success && `Hi ${username_from_server}`}
         </button>
@@ -323,12 +327,43 @@ const Navbar = () => {
         <button onClick={() => b__dialog.current.showModal()}>
           Create an account
         </button>
-      </nav>
-      <hr />
-
-      <dialog ref={a__dialog} style={{
-        width: "330px"
+      </nav> */}
+      <header style={{
+        backgroundColor: "#e50914",
+        padding: "20px",
+        color: "white"
       }}>
+        <div style={{
+          display: "flex",
+          justifyContent: "space-around",
+          alignItems: "center"
+        }}>
+          <img
+            src="static/pictures/foo.jpg"
+            alt="..."
+            height="69px"
+            width="180px"
+            style={{
+              borderRadius: "15px",
+            }}
+          />
+          <nav>
+            <NavLink to="/" style={{ color: "white", marginLeft: "20px", textDecoration: "none", fontWeight: "bold" }}>Home</NavLink>
+            <a href="#movies" style={{ color: "white", marginLeft: "20px", textDecoration: "none", fontWeight: "bold" }}>Movies</a>
+            <a href="#events" style={{ color: "white", marginLeft: "20px", textDecoration: "none", fontWeight: "bold" }}>Events</a>
+            <a href="#" style={{ color: "white", marginLeft: "20px", textDecoration: "none", fontWeight: "bold" }}>Contact</a>
+            <a href="login.html" style={{ color: "white", marginLeft: "20px", textDecoration: "none", fontWeight: "bold" }}>Log In</a>
+          </nav>
+        </div>
+      </header>
+      
+
+      <dialog
+        ref={a__dialog}
+        style={{
+          width: "330px",
+        }}
+      >
         <div
           style={{
             marginBottom: "5px",
@@ -342,10 +377,18 @@ const Navbar = () => {
               a__dialog.current.close();
             }}
           >
-                  <svg viewBox="0 0 10 10" width="24" height="24" stroke="currentColor" strokeWidth="2" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <line x1="1" y1="1" x2="9" y2="9" />
-  <line x1="9" y1="1" x2="1" y2="9" />
-</svg>
+            <svg
+              viewBox="0 0 10 10"
+              width="24"
+              height="24"
+              stroke="currentColor"
+              strokeWidth="2"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <line x1="1" y1="1" x2="9" y2="9" />
+              <line x1="9" y1="1" x2="1" y2="9" />
+            </svg>
           </button>
         </div>
         {unlogged && (
@@ -367,17 +410,19 @@ const Navbar = () => {
             </p>
             <p>
               <div
-              style={{
-                textDecoration: "underline",
-                textDecorationColor: "blue",
-                color: "blue",
-                cursor: "pointer"
-              }}
-              onClick={() => {
-                navigate(username_from_server);
-                a__dialog.current.close();
-
-              }}>Your bookings</div>
+                style={{
+                  textDecoration: "underline",
+                  textDecorationColor: "blue",
+                  color: "blue",
+                  cursor: "pointer",
+                }}
+                onClick={() => {
+                  navigate(username_from_server);
+                  a__dialog.current.close();
+                }}
+              >
+                Your bookings
+              </div>
             </p>
           </>
         )}
@@ -405,13 +450,18 @@ const Navbar = () => {
         >
           <div></div>
           <button onClick={() => b__dialog.current.close()}>
-            <svg viewBox="0 0 10 10" width="24" height="24" stroke="currentColor" strokeWidth="2" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <line x1="1" y1="1" x2="9" y2="9" />
-  <line x1="9" y1="1" x2="1" y2="9" />
-</svg>
-
-
-
+            <svg
+              viewBox="0 0 10 10"
+              width="24"
+              height="24"
+              stroke="currentColor"
+              strokeWidth="2"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <line x1="1" y1="1" x2="9" y2="9" />
+              <line x1="9" y1="1" x2="1" y2="9" />
+            </svg>
           </button>
         </div>
         <form onSubmit={(event) => handle_user_creation(event)}>
