@@ -18,6 +18,14 @@ function App() {
   return (
     <>
       {/* TODO: Enhance Types & states */}
+      <section className="banner">
+    <img src="static/pictures/slider.avif" alt="..." style={{
+      backgroundImage: "linear-gradient(to right, #000000, #434343)",
+      color: "white",
+      textAlign: "center",
+      padding: "20px 20px"
+    }} />
+  </section>
       <div style={{ padding: "0px 30px" }}>
         <div className={styles.container}>
           {is_movies_pending && <p>Pending ....</p>}
