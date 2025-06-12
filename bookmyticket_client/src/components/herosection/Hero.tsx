@@ -77,6 +77,7 @@ const Hero = ({ id }: { id: number }) => {
                     : spec_movie.runtime % 60
                 } minutes`}
               </p>
+              <p style={{ color: "white"}}>{spec_movie.description}</p>
             </div>
             <div></div>
           </div>

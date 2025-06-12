@@ -16,7 +16,7 @@ const Card = ({
     <div style={{ display: "grid", placeContent: "center" }}>
       <div
         style={{
-          backgroundImage: `url("${cover}")`,
+          backgroundImage: `url("${poster}")`,
           backgroundSize: "cover",
           backgroundPosition: "center center",
           borderRadius: "10px",

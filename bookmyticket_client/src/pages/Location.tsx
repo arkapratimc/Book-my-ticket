@@ -35,7 +35,7 @@ const Location = () => {
       {is_locations_err && (
         <p style={{ color: "red" }}>{locations_err.message}</p>
       )}
-      <div>
+      <div style={{ backgroundColor: "oklch(96.7% 0.003 264.542)", padding: "45px" }}>
         {/*is_locations_success &&
           locations_list.map((date) => {
             let dateyy = new Date(date.happening_date);
@@ -80,7 +80,8 @@ const Location = () => {
                     backgroundColor: "white",
                     padding: "6px",
                     borderRadius: "10px",
-                    boxShadow: "0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)"
+                    boxShadow: "0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)",
+                    marginBottom: "10px"
                   }}
                 >
                   <h2 className="text-2xl font-bold mb-4 text-blue-600">
@@ -92,12 +93,23 @@ const Location = () => {
               
                       return <>
                       <h3 className="text-xl font-semibold text-gray-800 mb-2">{place}</h3>
-                      {times.map((idx) => {
+                      <div style={{
+                        display: "flex",
+                        alignItems: "center",
+                        gap: "10px"
+                      }}>
+                        {times.map((idx) => {
 
                         console.log(idx);
                     return <span
                       
                       className="bg-yellow-300 text-black px-4 py-2 rounded-lg text-sm font-medium shadow-sm hover:bg-yellow-400 transition"
+                      style={{
+                        backgroundColor: "oklch(90.5% 0.182 98.111)",
+                        padding: "4px 8px",
+                        borderRadius: "8px",
+                        boxShadow: "0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1)"
+                      }}
                       onClick={() => {
 
                         navigate(`/${movie}/${id}/${idx.id}`)
@@ -106,6 +118,8 @@ const Location = () => {
                       {idx.time}
                     </span>
                     })}
+                      </div>
+                      
                       
                       </>
                     })}

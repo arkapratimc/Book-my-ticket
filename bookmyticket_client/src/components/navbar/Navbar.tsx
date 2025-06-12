@@ -306,7 +306,9 @@ const Navbar = () => {
       <nav className={style.navy}>
         <NavLink to="/">
         
-        <h1>Book My Ticket</h1>
+        <img src="static/pictures/foo.jpg" alt="Book My Show Logo"  style={{ 
+          borderRadius: "15px"
+         }} height="69px" width="180px"/>
         </NavLink>
         <button
           onClick={() => {
