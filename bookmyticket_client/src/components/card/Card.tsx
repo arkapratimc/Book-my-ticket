@@ -1,6 +1,7 @@
 import styles from "./Card.module.css";
 import { type Movie } from "../../utils/types.js";
 import { NavLink, useNavigate } from "react-router-dom";
+import { formatMinutes, split_parts } from "../../utils/constants.js";
 
 const Card = ({
   name,
@@ -28,7 +29,7 @@ const Card = ({
           borderRadius: "10px"
         }}/>
         <h3 style={{ margin: "10px 0 5px" }}>{name}</h3>
-        <p style={{ color: "#555", fontSize: "0.9em", marginBottom: "10px" }}>Action, Crime | 2h 07min</p>
+        <p style={{ color: "#555", fontSize: "0.9em", marginBottom: "10px" }}>{split_parts(description).part2} | {formatMinutes(runtime)}</p>
         <NavLink to={`/${name.replaceAll(" ", "-")}/${id}`} style={{ backgroundColor: "#e50914", color: "#fff", border: "none", padding: "8px 12px", borderRadius: "5px", fontWeight: "bold" }}>Book Now</NavLink>
       </div>
     

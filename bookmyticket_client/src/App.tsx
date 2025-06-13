@@ -3,6 +3,7 @@ import { Card } from "./components/card/Card.js";
 import styles from "./components/card/Card.module.css";
 import { type Movies } from "./utils/types.js";
 import { NavLink, useNavigate } from "react-router-dom";
+import { split_parts } from "./utils/constants.js";
 
 function App() {
   const {
@@ -79,7 +80,10 @@ function App() {
             <p style={{ color: "red" }}>{movies_err.message}</p>
           )}
           {is_movies_success &&
-            movies_data.map((card) => (
+            movies_data.filter(card => {
+              let r = split_parts(card.description);
+              return r.part1 === "Movie";
+            }).map((card) => (
               <Card
                 id={card.id}
                 name={card.name}

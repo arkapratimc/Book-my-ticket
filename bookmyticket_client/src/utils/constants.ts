@@ -81,7 +81,14 @@ function split_parts(given_string: string) {
     }
 }
 
+function formatMinutes(minutes) {
+  const hrs = Math.floor(minutes / 60);
+  const mins = minutes % 60;
+
+  if (hrs > 0 && mins > 0) return `${hrs}h ${mins} min`;
+  if (hrs > 0) return `${hrs}h`;
+  return `${mins} min`;
+}
 
 
-
-export { LOGIN_FIELD_NAMES, AUTH_STATES, CREATE_USER_FIELD_NAMES, unusualMap, split_parts };
+export { LOGIN_FIELD_NAMES, AUTH_STATES, CREATE_USER_FIELD_NAMES, unusualMap, split_parts, formatMinutes };
