@@ -51,15 +51,37 @@ let unusualMap = (rawInput: Occurence[]) => {
         let does_it_have = RESULT.map(x => x[0]).findIndex(elem => elem === resultant_key);
         if (does_it_have === -1) {
             // RESULT.set(resultant_key, [occurence]);
-            RESULT.push([ resultant_key, [ occurence ] ]);
+            RESULT.push([resultant_key, [occurence]]);
         } else {
             let inter = RESULT[does_it_have][1]
             inter.push(occurence);
         }
     }
     yetanotherUnusualMap(RESULT);
-    
+
     return RESULT;
 };
 
-export { LOGIN_FIELD_NAMES, AUTH_STATES, CREATE_USER_FIELD_NAMES, unusualMap };
+function split_parts(given_string: string) {
+    // const largeString = "This is the first sentence. Here's the second one. Now comes the third. And even more after that.";
+
+    const sentences = given_string.match(/[^.!?]+[.!?]+/g); // Split into sentences
+
+    const part1 = sentences[0]?.replace(/[.!?]+$/, '').trim() ?? "";
+    const part2 = sentences[1]?.replace(/[.!?]+$/, '').trim() ?? "";
+    const part3 = sentences.slice(2).join(' ').trim();
+
+    // console.log("Part 1:", part1);
+    // console.log("Part 2:", part2);
+    // console.log("Part 3:", part3);
+    return {
+        part1, // type
+        part2, // genre
+        part3 // desc
+    }
+}
+
+
+
+
+export { LOGIN_FIELD_NAMES, AUTH_STATES, CREATE_USER_FIELD_NAMES, unusualMap, split_parts };

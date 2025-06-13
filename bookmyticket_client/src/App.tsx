@@ -61,6 +61,7 @@ function App() {
           padding: "40px 20px",
           backgroundColor: "white",
         }}
+        id="movies"
       >
         <h2>Now Showing</h2>
 
@@ -206,6 +207,7 @@ function App() {
           padding: "40px 20px",
           textAlign: "center",
         }}
+        id="premiere"
       >
         <h2
           style={{

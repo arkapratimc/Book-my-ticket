@@ -444,6 +444,7 @@ const Navbar = () => {
                 marginLeft: "20px",
                 textDecoration: "none",
                 fontWeight: "bold",
+                cursor: "pointer"
               }}
             >
               Log In
@@ -457,6 +458,7 @@ const Navbar = () => {
                 marginLeft: "20px",
                 textDecoration: "none",
                 fontWeight: "bold",
+                cursor: "pointer"
               }}
             >
               Create an Account
