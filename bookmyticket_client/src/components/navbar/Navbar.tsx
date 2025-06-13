@@ -27,54 +27,93 @@ const Login = ({
 }) => {
   return (
     <>
-      <div
-        style={{
-          textAlign: "center",
-          fontSize: "32px",
-          fontWeight: "bold",
-        }}
-      >
-        Login form
+      <div>
+        <div
+          style={{
+            textAlign: "center",
+            fontSize: "32px",
+            fontWeight: "bold",
+            color: "#e50914",
+          }}
+        >
+          Login to BookMyTicket
+        </div>
+        <form
+          style={{
+            marginTop: "20px",
+          }}
+          onSubmit={(event) => handleLogFunc(event)}
+        >
+          <label
+            style={{
+              display: "block",
+              marginBottom: "20px",
+              fontSize: "20px",
+              fontWeight: "bold",
+            }}
+          >
+            Username
+            <input
+              type="text"
+              placeholder="Username"
+              name={LOGIN_FIELD_NAMES.username}
+              style={{
+                display: "block",
+                height: "30px",
+                width: "100%",
+                marginTop: "10px",
+              }}
+            />
+          </label>
+
+          {errorState.username && (
+            <p style={{ color: "red" }}>Please write a valid username</p>
+          )}
+
+          <label
+            style={{
+              display: "block",
+              marginBottom: "5px",
+              fontSize: "20px",
+              fontWeight: "bold",
+            }}
+          >
+            Password
+            <input
+              type="password"
+              placeholder="Password"
+              name={LOGIN_FIELD_NAMES.password}
+              style={{
+                display: "block",
+                height: "30px",
+                width: "100%",
+              }}
+            />
+          </label>
+
+          {errorState.password && (
+            <p style={{ color: "red" }}>Please write a valid password</p>
+          )}
+          <div
+            style={{
+              display: "grid",
+              placeItems: "center",
+            }}
+          >
+            <button
+              type="submit"
+              style={{
+                padding: "10px",
+                color: "white",
+                background: "green",
+                borderRadius: "5px",
+              }}
+            >
+              Log in
+            </button>
+          </div>
+        </form>
       </div>
-      <form onSubmit={(event) => handleLogFunc(event)}>
-        <label style={{ display: "block", marginBottom: "5px" }}>
-          Username
-          <input
-            type="text"
-            placeholder="Username"
-            name={LOGIN_FIELD_NAMES.username}
-            style={{
-              display: "block",
-              height: "30px",
-              width: "100%",
-            }}
-          />
-        </label>
-
-        {errorState.username && (
-          <p style={{ color: "red" }}>Please write a valid username</p>
-        )}
-
-        <label style={{ display: "block", marginBottom: "5px" }}>
-          Password
-          <input
-            type="password"
-            placeholder="Password"
-            name={LOGIN_FIELD_NAMES.password}
-            style={{
-              display: "block",
-              height: "30px",
-              width: "100%",
-            }}
-          />
-        </label>
-
-        {errorState.password && (
-          <p style={{ color: "red" }}>Please write a valid password</p>
-        )}
-
-        <button type="submit">Log in</button>
-      </form>
     </>
   );
 };
@@ -328,16 +367,20 @@ const Navbar = () => {
           Create an account
         </button>
       </nav> */}
-      <header style={{
-        backgroundColor: "#e50914",
-        padding: "20px",
-        color: "white"
-      }}>
-        <div style={{
-          display: "flex",
-          justifyContent: "space-around",
-          alignItems: "center"
-        }}>
+      <header
+        style={{
+          backgroundColor: "#e50914",
+          padding: "20px",
+          color: "white",
+        }}
+      >
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-around",
+            alignItems: "center",
+          }}
+        >
           <img
             src="static/pictures/foo.jpg"
             alt="..."
@@ -348,20 +391,87 @@ const Navbar = () => {
             }}
           />
           <nav>
-            <NavLink to="/" style={{ color: "white", marginLeft: "20px", textDecoration: "none", fontWeight: "bold" }}>Home</NavLink>
-            <a href="#movies" style={{ color: "white", marginLeft: "20px", textDecoration: "none", fontWeight: "bold" }}>Movies</a>
-            <a href="#events" style={{ color: "white", marginLeft: "20px", textDecoration: "none", fontWeight: "bold" }}>Events</a>
-            <a href="#" style={{ color: "white", marginLeft: "20px", textDecoration: "none", fontWeight: "bold" }}>Contact</a>
-            <a href="login.html" style={{ color: "white", marginLeft: "20px", textDecoration: "none", fontWeight: "bold" }}>Log In</a>
+            <NavLink
+              to="/"
+              style={{
+                color: "white",
+                marginLeft: "20px",
+                textDecoration: "none",
+                fontWeight: "bold",
+              }}
+            >
+              Home
+            </NavLink>
+            <a
+              href="#movies"
+              style={{
+                color: "white",
+                marginLeft: "20px",
+                textDecoration: "none",
+                fontWeight: "bold",
+              }}
+            >
+              Movies
+            </a>
+            <a
+              href="#events"
+              style={{
+                color: "white",
+                marginLeft: "20px",
+                textDecoration: "none",
+                fontWeight: "bold",
+              }}
+            >
+              Events
+            </a>
+            <a
+              href="#premiere"
+              style={{
+                color: "white",
+                marginLeft: "20px",
+                textDecoration: "none",
+                fontWeight: "bold",
+              }}
+            >
+              Premiere
+            </a>
+            <span
+              onClick={() => {
+                a__dialog.current.showModal();
+              }}
+              style={{
+                color: "white",
+                marginLeft: "20px",
+                textDecoration: "none",
+                fontWeight: "bold",
+              }}
+            >
+              Log In
+            </span>
+            <span
+              onClick={() => {
+                b__dialog.current.showModal();
+              }}
+              style={{
+                color: "white",
+                marginLeft: "20px",
+                textDecoration: "none",
+                fontWeight: "bold",
+              }}
+            >
+              Create an Account
+            </span>
           </nav>
         </div>
       </header>
-      
 
       <dialog
         ref={a__dialog}
         style={{
           width: "330px",
+          padding: "30px 40px",
+          borderRadius: "10px",
+          boxShadow: "0 0 15px rgba(0, 0, 0, 0.1)",
         }}
       >
         <div
@@ -440,7 +550,15 @@ const Navbar = () => {
         )}
       </dialog>
 
-      <dialog ref={b__dialog}>
+      <dialog
+        style={{
+          padding: "30px 40px",
+          borderRadius: "10px",
+          boxShadow: "0 0 15px rgba(0, 0, 0, 0.1)",
+          width: "330px",
+        }}
+        ref={b__dialog}
+      >
         <div
           style={{
             marginBottom: "5px",
@@ -464,19 +582,32 @@ const Navbar = () => {
             </svg>
           </button>
         </div>
-        <form onSubmit={(event) => handle_user_creation(event)}>
-          <label style={{ display: "block", marginBottom: "5px" }}>
+        <div style={{
+            textAlign: "center",
+            fontSize: "32px",
+            fontWeight: "bold",
+            color: "#e50914",
+          }}>
+            Create an account
+          </div>
+        <form style={{
+          marginTop: "20px"
+        }} onSubmit={(event) => handle_user_creation(event)}>
+          <label style={{ display: "block", marginBottom: "5px", fontWeight: "bold", fontSize: "20px" }}>
             Username
             <input
               type="text"
               name={CREATE_USER_FIELD_NAMES.username}
               placeholder="Username"
+              style={{
+                marginTop: "10px"
+              }}
             />
           </label>
           {createAccErrorState.username && (
             <p style={{ color: "red" }}>Please write a valid username</p>
           )}
-          <label style={{ display: "block", marginBottom: "5px" }}>
+          <label style={{ display: "block", marginBottom: "5px", fontWeight: "bold", fontSize: "20px" }}>
             Password
             <input
               type="password"
@@ -487,7 +618,17 @@ const Navbar = () => {
           {createAccErrorState.password && (
             <p style={{ color: "red" }}>Please write a valid password</p>
           )}
-          <button type="submit">Submit</button>
+          <div style={{
+            display: "grid",
+            placeItems: "center"
+          }}>
+          <button type="submit" style={{
+            padding: "10px",
+            backgroundColor: "green",
+            borderRadius: "10px",
+            color: "white"
+          }}>Submit</button>
+          </div>
         </form>
       </dialog>
 
