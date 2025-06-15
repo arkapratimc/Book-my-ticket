@@ -8,7 +8,9 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'bookmyticket_server.settings') 
 django.setup()
 
 # Step 3: Import your models
-from movies.models import Movie  # replace 'yourapp' and 'YourModel' accordingly
+from movies.models import Movie, TimeAndPlace  # replace 'yourapp' and 'YourModel' accordingly
+from datetime import datetime
+
 
 Movie.objects.create(
     name="Housefull 5",
@@ -99,7 +101,7 @@ Movie.objects.create(
 
 Movie.objects.create(
     name="Final Destination Bloodlines",
-    description="""Movie. Horror, Supernatural. The newest chapter in New Line Cinema's bloody successful franchise takes audiences back to the very beginning of Death's twisted sense of justice---"Final Destination Bloodlines."""",
+    description="Movie. Horror, Supernatural. The newest chapter in New Line Cinema's bloody successful franchise takes audiences back to the very beginning of Death's twisted sense of justice---\"Final Destination Bloodlines.\"",
     runtime=110,
     rating=5,
     poster="https://assets-in.bmscdn.com/iedb/movies/images/mobile/thumbnail/xlarge/final-destination-bloodlines-et00432143-1746683831.jpg",
@@ -179,7 +181,7 @@ Movie.objects.create(
 
 Movie.objects.create(
     name="Marco the invented truth",
-    description="""Based on true events, Marco explores the story of a concentration camp deportee who never existed.
+    description="""Premiere. Comedy, Drama. Based on true events, Marco explores the story of a concentration camp deportee who never existed.
 Enric Marco, an immensely charismatic man who, for years, was able to maintain, before public opinion and his own family, a deeply complex lie""",
     runtime=101,
     rating=5,
@@ -187,3 +189,68 @@ Enric Marco, an immensely charismatic man who, for years, was able to maintain, 
     cover="https://upload.wikimedia.org/wikipedia/en/thumb/0/0f/Marco%2C_the_Invented_Truth_poster.jpg/250px-Marco%2C_the_Invented_Truth_poster.jpg"
 )
 
+
+queryset = Movie.objects.all()
+for record in queryset:
+    if record.description.startswith("Movie.") or record.description.startswith("Premiere"):
+        dt1 = datetime(2025, 6, 16, 17, 30, 0)
+        dt2 = datetime(2025, 6, 16, 18, 30, 0)
+        dt3 = datetime(2025, 6, 17, 17, 30, 0)
+        dt4 = datetime(2025, 6, 17, 18, 30, 0)
+        TimeAndPlace.objects.create(
+            occurence=dt1,
+            movie=record,
+            hallName="PVR",
+            address="Diamond Plaza"
+        )
+        TimeAndPlace.objects.create(
+            occurence=dt2,
+            movie=record,
+            hallName="PVR",
+            address="Diamond Plaza"
+        )
+        TimeAndPlace.objects.create(
+            occurence=dt3,
+            movie=record,
+            hallName="PVR",
+            address="Diamond Plaza"
+        )
+        TimeAndPlace.objects.create(
+            occurence=dt4,
+            movie=record,
+            hallName="PVR",
+            address="Diamond Plaza"
+        )
+        TimeAndPlace.objects.create(
+            occurence=dt1,
+            movie=record,
+            hallName="CC2",
+            address="New Town"
+        )
+        TimeAndPlace.objects.create(
+            occurence=dt2,
+            movie=record,
+            hallName="CC2",
+            address="New Town"
+        )
+        TimeAndPlace.objects.create(
+            occurence=dt3,
+            movie=record,
+            hallName="CC2",
+            address="New Town"
+        )
+        TimeAndPlace.objects.create(
+            occurence=dt4,
+            movie=record,
+            hallName="CC2",
+            address="New Town"
+        )
+
+    else: 
+        dt3 = datetime(2025, 6, 17, 17, 30, 0)
+        TimeAndPlace.objects.create(
+            occurence=dt3,
+            movie=record,
+            hallName="Kolkata Satire Club",
+            address="New Town"
+        )
