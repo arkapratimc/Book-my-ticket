@@ -13,8 +13,14 @@ const UserTickets = () => {
   console.log(isSuccess && data);
   return (
     <>
-      <p>Hi {user} !!!!!</p>
-      <p>These are your bookings :- </p>
+      <p style={{
+        textDecoration: "underline",
+        marginBottom: "20px"
+      }}>Hi {user} !!!!!</p>
+      <p style={{
+        paddingTop: "5px",
+        borderTop: "1px solid black"
+      }}>These are your bookings :- </p>
 
       {isSuccess &&
         data.map((x, index) => (
@@ -27,7 +33,9 @@ const UserTickets = () => {
               <p>
                 Seats booked -{" "}
                 {Object.keys(x.seats).map((y, index, arr) => (
-                  <span>{`${y} ${index === arr.length - 1 ? "" : ", "}`} </span>
+                  <span style={{
+                    color: "red"
+                  }}>{`${y} ${index === arr.length - 1 ? "" : ", "}`} </span>
                 ))}
               </p>
               <p>Starting time - {x.starting_time}</p>
