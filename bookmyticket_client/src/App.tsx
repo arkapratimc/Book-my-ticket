@@ -3,7 +3,7 @@ import { Card } from "./components/card/Card.js";
 import styles from "./components/card/Card.module.css";
 import { type Movies } from "./utils/types.js";
 import { NavLink, useNavigate } from "react-router-dom";
-import { split_parts } from "./utils/constants.js";
+import { formatMinutes, split_parts } from "./utils/constants.js";
 
 function App() {
   const {
@@ -129,7 +129,11 @@ function App() {
             <p style={{ color: "red" }}>{movies_err.message}</p>
           )}
           {is_movies_success &&
-            movies_data.map((card) => (
+            movies_data.filter(card => {
+              let r = split_parts(card.description);
+              console.log(r.part1);
+              return r.part1 === "Event";
+            }).map((card) => (
               <>
                 <div
                   className="event-card"
@@ -168,10 +172,10 @@ function App() {
                       margin: "10px 0px",
                     }}
                   >
-                    EDM Festival | Goa | 15 June
+                    {card.name} | {formatMinutes(card.runtime)}
                   </p>
                   <NavLink
-                    to="seats.html"
+                    to={`/${card.name.replaceAll(" ", "-")}/${card.id}`}
                     style={{
                       backgroundColor: "#e50914",
                       color: "white",
@@ -246,7 +250,10 @@ function App() {
             <p style={{ color: "red" }}>{movies_err.message}</p>
           )}
           {is_movies_success &&
-            movies_data.map((card) => (
+            movies_data.filter(card => {
+              let r = split_parts(card.description);
+              return r.part1 === "Premiere";
+            }).map((card) => (
               <>
                 <div
                   className="premiere-card"
@@ -262,7 +269,8 @@ function App() {
                     width: "100%",
                     height:"auto",
                     display: "block"
-                  }} />
+                  }}
+                  onClick={() => { navigate(`/${card.name.replaceAll(" ", "-")}/${card.id}`) }} />
                   <h4 style={{
                     margin: "15px 10px 5px",
                     fontSize: "1.1em",
@@ -272,7 +280,7 @@ function App() {
                     margin: "0 10px 15px",
                     fontSize: "0.9em",
                     color: "#ccc"
-                  }}>Drama | Hindi</p>
+                  }}>{split_parts(card.description).part2} | {formatMinutes(card.runtime)}</p>
                 </div>
               </>
             ))}
