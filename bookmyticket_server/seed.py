@@ -98,10 +98,92 @@ Movie.objects.create(
 )
 
 Movie.objects.create(
-    name="Pokkhirajer Dim",
+    name="Final Destination Bloodlines",
     description="""Movie. Horror, Supernatural. The newest chapter in New Line Cinema's bloody successful franchise takes audiences back to the very beginning of Death's twisted sense of justice---"Final Destination Bloodlines."""",
     runtime=110,
     rating=5,
     poster="https://assets-in.bmscdn.com/iedb/movies/images/mobile/thumbnail/xlarge/final-destination-bloodlines-et00432143-1746683831.jpg",
     cover="https://assets-in.bmscdn.com/iedb/movies/images/mobile/thumbnail/xlarge/final-destination-bloodlines-et00432143-1746683831.jpg"
 )
+
+Movie.objects.create(
+    name="Well Trained By Atul Khatri",
+    description="Event. Comedy. Yes, meet Atul Khatri, , a middle-aged ex-CEO -tuned-comedian who quit his job in 2016 and now makes a living making people laugh harder than they ever.",
+    runtime=124,
+    rating=5,
+    poster="https://upload.wikimedia.org/wikipedia/commons/thumb/2/27/Atul_Khatri_in_Surat%2C_May_2022.jpg/500px-Atul_Khatri_in_Surat%2C_May_2022.jpg",
+    cover="https://upload.wikimedia.org/wikipedia/commons/thumb/2/27/Atul_Khatri_in_Surat%2C_May_2022.jpg/500px-Atul_Khatri_in_Surat%2C_May_2022.jpg"
+)
+
+Movie.objects.create(
+    name="Telling Lies By Ashish Solanki",
+    description="Event. Comedy. Aashish Solanki is back with a brand-new hour, and life’s a little different now. He’s a new dad—still figuring out how to be a parent while surviving on coffee and jokes.",
+    runtime=124,
+    rating=5,
+    poster="https://preview.redd.it/ashish-solanki-v0-4k7q9n024std1.jpeg?width=554&format=pjpg&auto=webp&s=6a59cf37045d697e396ba8c75f8577e82855ddcb",
+    cover="https://preview.redd.it/ashish-solanki-v0-4k7q9n024std1.jpeg?width=554&format=pjpg&auto=webp&s=6a59cf37045d697e396ba8c75f8577e82855ddcb"
+)
+
+Movie.objects.create(
+    name="Kisiko batana mat by Anubhav Singh Bassi",
+    description="Event. Comedy. After the great success of his previous show Bas kar bassi, Anubhav Singh Bassi is coming back to perform live on stage. This time, he will bring a whole new set of funny stories and jokes that will keep you entertained. Get ready to enjoy an exciting and hilarious performance that will make you laugh uncontrollably and leave you in high spirits.",
+    runtime=124,
+    rating=5,
+    poster="https://m.media-amazon.com/images/S/pv-target-images/210a526803adc7d003d6a83eddffa06e13b1f037a25284175f5bf50dd4e6eba8.jpg",
+    cover="https://m.media-amazon.com/images/S/pv-target-images/210a526803adc7d003d6a83eddffa06e13b1f037a25284175f5bf50dd4e6eba8.jpg"
+)
+Movie.objects.create(
+    name="The Last Wish",
+    description="Premiere. Drama, Romantic. The film tells the story of Deniz, who tries to fulfill her daughter's last wishes after her six-year-old daughter, Cemre, whom she raised alone, contracts a fatal disease.",
+    runtime=124,
+    rating=5,
+    poster="https://m.media-amazon.com/images/M/MV5BZGNlZTQxZWYtMGZlMy00MjFlLWJlNWMtMGM3MjI5OTQ2NGMxXkEyXkFqcGc@._V1_QL75_UY207_CR2,0,140,207_.jpg",
+    cover="https://m.media-amazon.com/images/M/MV5BZGNlZTQxZWYtMGZlMy00MjFlLWJlNWMtMGM3MjI5OTQ2NGMxXkEyXkFqcGc@._V1_QL75_UY207_CR2,0,140,207_.jpg"
+)
+
+Movie.objects.create(
+    name="Hollywoodgate",
+    description="Premiere. Documentary, War. Unprecedented and audacious, HOLLYWOODGATE is the riveting result of the year director Ibrahim Nash`at spent with the Taliban in the wake of the United States withdrawal from Afghanistan in 2021. Risking his life in the war-torn nation, Nash`at is on the ground with the Taliban when they enter an American base loaded with a portion of the roughly $7 billion worth of U.S. armaments left behind.",
+    runtime=91,
+    rating=5,
+    poster="https://m.media-amazon.com/images/M/MV5BZTJiZDQ1NTgtNWYwMy00MTJjLTliMjEtZTE2OTdkZjExMDEwXkEyXkFqcGc@._V1_.jpg",
+    cover="https://m.media-amazon.com/images/M/MV5BZTJiZDQ1NTgtNWYwMy00MTJjLTliMjEtZTE2OTdkZjExMDEwXkEyXkFqcGc@._V1_.jpg"
+)
+Movie.objects.create(
+    name="Things will be different",
+    description="Premiere. Horror, Scifi. When estranged siblings, Joseph and Sidney, rendezvous at a local diner after a close-call robbery, they hightail it to an abandoned farmhouse that transports them to a different time in order to escape the local cops. But when they try to return to their present after the coast is clear, an unknown metaphysical force cuts them off and maroons them on the land unless they do exactly what they're told. What comes from this not only bends the forces of spacetime but also b",
+    runtime=102,
+    rating=5,
+    poster="https://m.media-amazon.com/images/M/MV5BNjVjZjBlMWItMWFkNS00ZGY4LTk2NzctN2JkNmJiNDQ0NzJhXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg",
+    cover="https://m.media-amazon.com/images/M/MV5BNjVjZjBlMWItMWFkNS00ZGY4LTk2NzctN2JkNmJiNDQ0NzJhXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg"
+)
+
+
+Movie.objects.create(
+    name="The Other Way Around",
+    description="Premiere. Comedy, Drama. After 15 years together, Ale and Alex have come up with the crazy idea of throwing a party to celebrate their recent breakup. While their close ones are quite skeptical, they seem to be sure of their decision. Or are they really?",
+    runtime=112,
+    rating=5,
+    poster="https://m.media-amazon.com/images/M/MV5BNTVkNDU5NzUtMTUzZS00MTgzLWJjZTgtNjM1YmI2ODFlMDYzXkEyXkFqcGc@._V1_.jpg",
+    cover="https://m.media-amazon.com/images/M/MV5BNTVkNDU5NzUtMTUzZS00MTgzLWJjZTgtNjM1YmI2ODFlMDYzXkEyXkFqcGc@._V1_.jpg"
+)
+
+Movie.objects.create(
+    name="Green Night",
+    description="Premiere. Comedy, Drama. In an effort to escape her troubled past, Jin Xia, a Chinese woman, marries a Korean man named Lee Seung-hun in exchange for legal status in South Korea.",
+    runtime=92,
+    rating=5,
+    poster="https://m.media-amazon.com/images/S/pv-target-images/2123cb8921146d172c60964352233ada427661ecab783eaf410208f0e94fd80c.jpg",
+    cover="https://m.media-amazon.com/images/S/pv-target-images/2123cb8921146d172c60964352233ada427661ecab783eaf410208f0e94fd80c.jpg"
+)
+
+Movie.objects.create(
+    name="Marco the invented truth",
+    description="""Based on true events, Marco explores the story of a concentration camp deportee who never existed.
+Enric Marco, an immensely charismatic man who, for years, was able to maintain, before public opinion and his own family, a deeply complex lie""",
+    runtime=101,
+    rating=5,
+    poster="https://upload.wikimedia.org/wikipedia/en/thumb/0/0f/Marco%2C_the_Invented_Truth_poster.jpg/250px-Marco%2C_the_Invented_Truth_poster.jpg",
+    cover="https://upload.wikimedia.org/wikipedia/en/thumb/0/0f/Marco%2C_the_Invented_Truth_poster.jpg/250px-Marco%2C_the_Invented_Truth_poster.jpg"
+)
+
